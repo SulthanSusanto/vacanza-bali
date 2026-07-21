@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { InstagramIcon, TikTokIcon } from "@/components/BrandIcons";
 
 const NAV_LINKS: { label: string; href: string }[] = [
   { label: "Home", href: "/" },
   { label: "Tours", href: "/tours" },
   { label: "About", href: "/about" },
-  // No dedicated gallery page/content yet — points at the tours listing for now.
-  { label: "Gallery", href: "/tours" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -41,6 +41,26 @@ export function Navbar() {
         </Link>
 
         <div className="hidden items-center gap-6 md:flex">
+          <div className="flex items-center gap-3 text-black/60">
+            <a
+              href="https://www.instagram.com/vacanza_balitour"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Vacanza Bali on Instagram"
+              className="hover:text-black"
+            >
+              <InstagramIcon className="h-4 w-4" />
+            </a>
+            <a
+              href="https://www.tiktok.com/@vacanzabali"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Vacanza Bali on TikTok"
+              className="hover:text-black"
+            >
+              <TikTokIcon className="h-4 w-4" />
+            </a>
+          </div>
           <button
             type="button"
             onClick={() => setOpen(true)}

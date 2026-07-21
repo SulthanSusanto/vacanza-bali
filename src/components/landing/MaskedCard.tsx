@@ -8,6 +8,7 @@ import type { MaskPosition } from "@/hooks/useMaskPositions";
  */
 export function MaskedCard({
   bgImage,
+  alt,
   position,
   imageWidth,
   focalX,
@@ -17,6 +18,8 @@ export function MaskedCard({
   style,
 }: {
   bgImage: string;
+  /** Accessible description of the photo — CSS background-images are invisible to screen readers otherwise. */
+  alt: string;
   position?: MaskPosition;
   imageWidth: number;
   focalX: number;
@@ -53,6 +56,10 @@ export function MaskedCard({
 
   return (
     <div ref={cardRef} className={className} style={backgroundStyle}>
+      {/* Visually hidden, not role="img" on the container — these cards
+          hold real headings/links as children, and role="img" would flatten
+          the whole subtree into one opaque image for screen readers. */}
+      <span className="sr-only">{alt}</span>
       {children}
     </div>
   );

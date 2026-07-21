@@ -6,21 +6,38 @@ import { useImageWidth } from "@/hooks/useImageWidth";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { useStaggeredReveal } from "@/hooks/useStaggeredReveal";
 import { MaskedCard } from "@/components/landing/MaskedCard";
+import { getTour } from "@/data/tours";
+import { getStartingTier } from "@/lib/pricing";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 
 // Placeholder — swap for real Vacanza photography before shipping.
 const SECTION2_IMAGE =
-  "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1280&q=85";
+  "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1920&q=85";
 
-// Full pricelist covers 10 categories with per-group-size tiers — see
-// /tours for the complete pricing. These four are the landing-page
-// signature picks.
-const tourPackages = [
-  { name: "Dolphin\nTour", num: "From IDR 450K", active: true },
-  { name: "Ubud Day\nTrip", num: "From IDR 695K", active: false },
-  { name: "Mt. Batur\nSunrise Trek", num: "From IDR 420K", active: false },
-  { name: "Nusa Penida\nDay Trip", num: "From IDR 450K", active: false },
+// These four are the landing-page signature picks — real pricing pulled
+// from src/data/tours.ts (the source of truth) so this can't drift stale.
+// Full pricelist covers 10 categories with per-group-size tiers, see /tours.
+const FEATURED_TOURS = [
+  { category: "dolphin-tour", product: "dolphin-snorkeling", displayName: "Dolphin\nTour", active: true },
+  { category: "ubud-trip", product: "ubud-day-trip-a", displayName: "Ubud Day\nTrip", active: false },
+  {
+    category: "mt-batur",
+    product: "batur-trekking",
+    displayName: "Mt. Batur\nSunrise Trek",
+    active: false,
+  },
+  {
+    category: "nusa-penida",
+    product: "nusa-penida-day-trip",
+    displayName: "Nusa Penida\nDay Trip",
+    active: false,
+  },
 ];
+
+function formatShortPrice(priceLabel: string): string {
+  const amount = parseInt(priceLabel.replace(/[^0-9]/g, ""), 10);
+  return `From IDR ${Math.round(amount / 1000)}K`;
+}
 
 const WHATSAPP_GROUP_HREF = buildWhatsAppLink(
   "Hi Vacanza Bali, we're traveling together and would like to combine into shared transport."
@@ -36,6 +53,16 @@ export function ExperiencesSection() {
   const imageWidth = useImageWidth(SECTION2_IMAGE, positions[0]?.sh ?? 0);
   const focalX = isMobile ? 0.65 : 0.8;
 
+  const tourPackages = FEATURED_TOURS.map(({ category, product, displayName, active }) => {
+    const tour = getTour(category, product);
+    const startingTier = tour ? getStartingTier(tour) : undefined;
+    return {
+      name: displayName,
+      num: startingTier ? formatShortPrice(startingTier.priceLabel) : "",
+      active,
+    };
+  });
+
   return (
     <section
       ref={sectionRef}
@@ -48,16 +75,18 @@ export function ExperiencesSection() {
             cardRefs.current[0] = el;
           }}
           bgImage={SECTION2_IMAGE}
+          alt="Bali temple beside a lake at dusk"
           position={positions[0]}
           imageWidth={imageWidth}
           focalX={focalX}
           className="relative min-h-[160px] overflow-hidden rounded-xl md:min-h-0 md:rounded-2xl"
           style={reveal.getAnimStyle(0)}
         >
-          <h2 className="absolute left-5 top-4 z-10 text-2xl font-bold text-white md:left-7 md:top-6 md:text-3xl md:text-black">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/30" />
+          <h2 className="absolute left-5 top-4 z-10 text-2xl font-bold text-white md:left-7 md:top-6 md:text-3xl">
             Bali Experiences
           </h2>
-          <p className="absolute bottom-4 left-5 z-10 text-xs font-semibold text-white md:bottom-6 md:left-7 md:text-sm md:text-black">
+          <p className="absolute bottom-4 left-5 z-10 text-xs font-semibold text-white md:bottom-6 md:left-7 md:text-sm">
             Our most-loved day trips
           </p>
         </MaskedCard>
@@ -68,12 +97,14 @@ export function ExperiencesSection() {
             cardRefs.current[1] = el;
           }}
           bgImage={SECTION2_IMAGE}
+          alt="Bali temple beside a lake at dusk"
           position={positions[1]}
           imageWidth={imageWidth}
           focalX={focalX}
           className="relative min-h-[200px] overflow-hidden rounded-xl md:min-h-0 md:rounded-2xl md:row-span-2"
           style={reveal.getAnimStyle(1)}
         >
+          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-black/35" />
           <p className="absolute bottom-16 left-5 z-10 text-xs font-semibold leading-4 text-white md:bottom-20 md:left-7 md:text-sm md:leading-5">
             Traveling with friends?
             <br />
@@ -95,13 +126,15 @@ export function ExperiencesSection() {
             cardRefs.current[2] = el;
           }}
           bgImage={SECTION2_IMAGE}
+          alt="Bali temple beside a lake at dusk"
           position={positions[2]}
           imageWidth={imageWidth}
           focalX={focalX}
           className="relative min-h-[160px] overflow-hidden rounded-xl md:min-h-0 md:rounded-2xl"
           style={reveal.getAnimStyle(2)}
         >
-          <h2 className="absolute left-5 top-4 z-10 text-[clamp(3rem,7vw,6rem)] font-bold leading-[0.9] text-white md:left-7 md:top-6 md:text-black">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/5 to-black/30" />
+          <h2 className="absolute left-5 top-4 z-10 text-[clamp(3rem,7vw,6rem)] font-bold leading-[0.9] text-white md:left-7 md:top-6">
             Sunrise
             <br />
             trekking
@@ -114,6 +147,7 @@ export function ExperiencesSection() {
             cardRefs.current[3] = el;
           }}
           bgImage={SECTION2_IMAGE}
+          alt="Bali temple beside a lake at dusk"
           position={positions[3]}
           imageWidth={imageWidth}
           focalX={focalX}
