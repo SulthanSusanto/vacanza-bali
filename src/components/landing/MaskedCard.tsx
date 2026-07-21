@@ -30,12 +30,22 @@ export function MaskedCard({
   const x = position?.x ?? 0;
   const y = position?.y ?? 0;
 
-  const overflow = imageWidth > sw ? imageWidth - sw : 0;
+  // imageWidth is the image's width when scaled to fill the section's
+  // *height*. On wide-but-not-very-tall viewports that can come out
+  // narrower than the section itself — with background-repeat:no-repeat
+  // that leaves a blank gap. Scale up (preserving aspect ratio, derived
+  // from imageWidth/sh) so the rendered width never falls below sw; only
+  // kicks in when the height-based scale wasn't already wide enough.
+  const aspect = sh > 0 ? imageWidth / sh : 0;
+  const renderHeight = aspect > 0 ? Math.max(sh, sw / aspect) : sh;
+  const renderWidth = aspect > 0 ? renderHeight * aspect : imageWidth;
+
+  const overflow = renderWidth > sw ? renderWidth - sw : 0;
   const focalOffset = overflow * focalX;
 
   const backgroundStyle: CSSProperties = {
     backgroundImage: `url(${bgImage})`,
-    backgroundSize: `auto ${sh}px`,
+    backgroundSize: `auto ${renderHeight}px`,
     backgroundPosition: `-${x + focalOffset}px -${y}px`,
     backgroundRepeat: "no-repeat",
     ...style,

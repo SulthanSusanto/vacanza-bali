@@ -64,7 +64,7 @@ export function HeroSection() {
         position={positions[3]}
         imageWidth={imageWidth}
         focalX={focalX}
-        className="relative min-h-0 w-full flex-1 overflow-hidden rounded-xl md:rounded-2xl"
+        className="relative min-h-[320px] w-full flex-1 overflow-hidden rounded-xl md:min-h-[480px] md:rounded-2xl"
         style={reveal.getAnimStyle(3)}
       >
         <p className="absolute left-4 top-4 z-10 max-w-[200px] text-xs font-semibold leading-4 text-black md:left-7 md:top-7 md:max-w-[300px] md:text-sm md:leading-5">
