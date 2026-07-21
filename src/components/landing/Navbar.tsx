@@ -28,7 +28,7 @@ export function Navbar() {
   return (
     <>
       <header className="fixed left-0 right-0 top-0 z-50 flex items-center justify-between bg-white/80 px-4 py-2 backdrop-blur-md md:px-6 md:py-3">
-        <Link href="/" className="flex flex-col">
+        <Link href="/" className="flex flex-col text-black">
           <span className="text-xl font-extrabold uppercase leading-none tracking-tight md:text-2xl">
             Vacanza
           </span>
@@ -44,7 +44,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="rounded-full border border-black bg-white px-6 py-3 text-sm font-semibold transition-colors duration-200 hover:bg-black hover:text-white"
+            className="rounded-full border border-black bg-white px-6 py-3 text-sm font-semibold text-black transition-colors duration-200 hover:bg-black hover:text-white"
           >
             Menu
           </button>

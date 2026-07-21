@@ -126,9 +126,9 @@ export function FullDayToursSection() {
               href={WHATSAPP_PLAN_HREF}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-36 flex-1 flex-col justify-between rounded-xl bg-white p-3 md:h-52 md:rounded-2xl md:p-5"
+              className="flex h-36 flex-1 flex-col justify-between rounded-xl bg-white p-3 text-black md:h-52 md:rounded-2xl md:p-5"
             >
-              <h4 className="text-lg font-bold leading-5 text-black md:text-2xl md:leading-7">
+              <h4 className="text-lg font-bold leading-5 md:text-2xl md:leading-7">
                 Plan Your
                 <br />
                 Bali Trip
