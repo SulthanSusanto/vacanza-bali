@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { WhatsAppFab } from "@/components/WhatsAppFab";
-import { StickyWhatsAppBar } from "@/components/StickyWhatsAppBar";
+import { SiteChrome } from "@/components/SiteChrome";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +22,7 @@ const fraunces = Fraunces({
 
 export const metadata: Metadata = {
   title: {
-    default: "Vacanza Bali — Tours, Trekking & Boat Tickets",
+    default: "Vacanza Bali - Private Tours & Day Trips",
     template: "%s | Vacanza Bali",
   },
   description:
@@ -42,12 +39,17 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} h-full antialiased`}
     >
+      {/* React/Next.js hoist <link> tags rendered anywhere in the tree to <head>. */}
+      <link
+        href="https://db.onlinewebfonts.com/c/1cd1e7d71e048159076fd90b39846902?family=Open+Sauce+One"
+        rel="stylesheet"
+      />
+      <link
+        href="https://db.onlinewebfonts.com/c/42acf9aa4a6dc2f2886a3f682e337ead?family=Open+Sauce+One+Bold"
+        rel="stylesheet"
+      />
       <body className="flex min-h-full flex-col">
-        <Header />
-        <main className="flex-1 pb-20 sm:pb-0">{children}</main>
-        <Footer />
-        <WhatsAppFab />
-        <StickyWhatsAppBar />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );
