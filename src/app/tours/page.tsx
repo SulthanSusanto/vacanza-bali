@@ -4,6 +4,7 @@ import { getToursByCategory } from "@/data/tours";
 import { ferryTickets } from "@/data/ferry-tickets";
 import { CategoryFilterBar } from "@/components/tours/CategoryFilterBar";
 import { CategorySection } from "@/components/tours/CategorySection";
+import { BackToTopButton } from "@/components/tours/BackToTopButton";
 
 export const metadata: Metadata = {
   title: "Tours & Pricing",
@@ -37,6 +38,8 @@ export default function ToursPricingPage() {
           />
         )
       )}
+
+      <BackToTopButton />
     </>
   );
 }

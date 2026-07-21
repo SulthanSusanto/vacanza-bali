@@ -4,6 +4,7 @@ import { Clock, MapPin } from "lucide-react";
 import { Hero } from "@/components/Hero";
 import { PriceSelector } from "@/components/PriceSelector";
 import { IncludeExcludeList } from "@/components/IncludeExcludeList";
+import { PlaceholderImage } from "@/components/PlaceholderImage";
 import { getCategory } from "@/data/categories";
 import { getTour, tours } from "@/data/tours";
 
@@ -61,6 +62,23 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
                 )}
               </div>
             )}
+
+            <div className="mt-8 grid grid-cols-2 gap-3">
+              <PlaceholderImage
+                theme={category.placeholderTheme}
+                label={tour.name}
+                seed={`${tour.slug}-gallery-1`}
+                showCaption={false}
+                className="h-40 w-full rounded-xl sm:h-56"
+              />
+              <PlaceholderImage
+                theme={category.placeholderTheme}
+                label={tour.name}
+                seed={`${tour.slug}-gallery-2`}
+                showCaption={false}
+                className="h-40 w-full rounded-xl sm:h-56"
+              />
+            </div>
 
             <div className="mt-8">
               <IncludeExcludeList includes={tour.includes} excludes={tour.excludes} />
