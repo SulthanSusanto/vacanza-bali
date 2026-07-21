@@ -2,11 +2,31 @@ import { MessageCircle } from "lucide-react";
 import { CategoryIconRow } from "@/components/CategoryIconRow";
 import { PromoBanner } from "@/components/PromoBanner";
 import { PopularToursCarousel } from "@/components/PopularToursCarousel";
-import { CategoryCard } from "@/components/CategoryCard";
+import { CategoryCard, type CategoryCardSize } from "@/components/CategoryCard";
 import { TrustRow } from "@/components/TrustRow";
-import { categories } from "@/data/categories";
+import { getCategory } from "@/data/categories";
 import { InstagramIcon, TikTokIcon } from "@/components/BrandIcons";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
+
+// Tiles a 4-col x 4-row grid exactly at the lg breakpoint: two 2x2 hero
+// tiles fill rows 1-2, a 2x1 + two 1x1s fill row 3, four 1x1s fill row 4.
+const BENTO_LAYOUT: { slug: string; size: CategoryCardSize }[] = [
+  { slug: "dolphin-tour", size: "large" },
+  { slug: "uluwatu-trip", size: "large" },
+  { slug: "ubud-trip", size: "wide" },
+  { slug: "mt-batur", size: "small" },
+  { slug: "nusa-penida", size: "small" },
+  { slug: "village-adventure", size: "small" },
+  { slug: "cycling-tour", size: "small" },
+  { slug: "fishing-trip", size: "small" },
+  { slug: "boat-tickets", size: "small" },
+];
+
+const SPAN_CLASS: Record<CategoryCardSize, string> = {
+  large: "lg:col-span-2 lg:row-span-2",
+  wide: "lg:col-span-2 lg:row-span-1",
+  small: "lg:col-span-1 lg:row-span-1",
+};
 
 export default function Home() {
   const whatsappHref = buildWhatsAppLink("Hi Vacanza Bali, I'd like to know more about your tours.");
@@ -22,10 +42,15 @@ export default function Home() {
         <p className="mt-1 text-sm text-muted-foreground">
           Nine categories, real pricing for your group size, booked on WhatsApp.
         </p>
-        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-          {categories.map((category) => (
-            <CategoryCard key={category.slug} category={category} />
-          ))}
+        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 lg:auto-rows-[160px] lg:grid-flow-dense">
+          {BENTO_LAYOUT.map(({ slug, size }) => {
+            const category = getCategory(slug);
+            return category ? (
+              <div key={slug} className={SPAN_CLASS[size]}>
+                <CategoryCard category={category} size={size} />
+              </div>
+            ) : null;
+          })}
         </div>
       </section>
 
