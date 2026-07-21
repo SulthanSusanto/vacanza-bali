@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { InstagramIcon, TikTokIcon } from "@/components/BrandIcons";
 
@@ -16,7 +17,12 @@ const NAV_LINKS: { label: string; href: string }[] = [
 const WHATSAPP_HREF = buildWhatsAppLink("Hi Vacanza Bali, I'd like to know more about your tours.");
 
 export function Navbar() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
+
+  function isActive(href: string) {
+    return href === "/" ? pathname === "/" : pathname.startsWith(href);
+  }
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -123,9 +129,9 @@ export function Navbar() {
                 href={link.href}
                 onClick={() => setOpen(false)}
                 style={{ transitionDelay: open ? `${100 + i * 60}ms` : "0ms" }}
-                className={`text-4xl font-bold text-black transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] hover:text-neutral-500 ${
-                  open ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
-                }`}
+                className={`text-4xl font-bold text-black underline-offset-8 transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] hover:text-neutral-500 ${
+                  isActive(link.href) ? "underline" : ""
+                } ${open ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"}`}
               >
                 {link.label}
               </Link>
