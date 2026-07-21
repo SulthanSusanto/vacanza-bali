@@ -10,7 +10,7 @@ export function CategoryCard({ category }: { category: TourCategory }) {
   return (
     <Link
       href={`/tours/${category.slug}`}
-      className="group block overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md"
+      className="group block overflow-hidden rounded-lg bg-card shadow-md shadow-black/5 transition-shadow hover:shadow-lg hover:shadow-black/10"
     >
       <PlaceholderImage
         theme={category.placeholderTheme}
@@ -25,7 +25,7 @@ export function CategoryCard({ category }: { category: TourCategory }) {
           {startingPrice ? (
             <p className="text-xs">
               <span className="text-muted-foreground">From </span>
-              <span className="font-mono font-bold text-primary">{startingPrice}</span>
+              <span className="font-mono text-sm font-extrabold text-primary">{startingPrice}</span>
             </p>
           ) : (
             <span />

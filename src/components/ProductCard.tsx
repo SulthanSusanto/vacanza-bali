@@ -22,7 +22,7 @@ export function ProductCard({
   return (
     <Link
       href={`/tours/${tour.categorySlug}/${tour.slug}`}
-      className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md sm:flex-row"
+      className="group flex flex-col overflow-hidden rounded-lg bg-card shadow-md shadow-black/5 transition-shadow hover:shadow-lg hover:shadow-black/10 sm:flex-row"
     >
       <PlaceholderImage
         theme={theme}
@@ -43,12 +43,12 @@ export function ProductCard({
               </span>
             )}
             {englishGuide && (
-              <span className="flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 text-[11px] text-muted-foreground">
+              <span className="flex items-center gap-1 rounded-full bg-success px-2 py-0.5 text-[11px] font-medium text-success-foreground">
                 <Languages className="h-3 w-3" /> English guide
               </span>
             )}
             {insured && (
-              <span className="flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 text-[11px] text-muted-foreground">
+              <span className="flex items-center gap-1 rounded-full bg-success px-2 py-0.5 text-[11px] font-medium text-success-foreground">
                 <Shield className="h-3 w-3" /> Insured
               </span>
             )}
@@ -58,7 +58,7 @@ export function ProductCard({
           {startingTier && (
             <p className="text-sm text-muted-foreground">
               From{" "}
-              <span className="font-mono text-base font-bold text-primary">
+              <span className="font-mono text-lg font-extrabold text-primary">
                 {startingTier.priceLabel}
               </span>
               <span className="text-xs">/{startingTier.unit === "per-boat" ? "boat" : "person"}</span>

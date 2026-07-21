@@ -49,7 +49,7 @@ export function PopularToursCarousel() {
             <Link
               key={tour.slug}
               href={`/tours/${category.slug}/${tour.slug}`}
-              className="group w-64 shrink-0 overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md sm:w-auto"
+              className="group w-64 shrink-0 overflow-hidden rounded-lg bg-card shadow-md shadow-black/5 transition-shadow hover:shadow-lg hover:shadow-black/10 sm:w-auto"
             >
               <PlaceholderImage
                 theme={category.placeholderTheme}
@@ -58,22 +58,22 @@ export function PopularToursCarousel() {
                 className="h-36 w-full"
               />
               <div className="p-4">
-                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                <span className="inline-block rounded-full bg-accent px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-accent-foreground">
                   {category.name}
-                </p>
-                <h3 className="mt-1 line-clamp-2 text-sm font-semibold text-card-foreground">
+                </span>
+                <h3 className="mt-1.5 line-clamp-2 text-sm font-semibold text-card-foreground">
                   {tour.name}
                 </h3>
 
                 {(englishGuide || insured) && (
                   <div className="mt-2 flex gap-2">
                     {englishGuide && (
-                      <span className="flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 text-[11px] text-muted-foreground">
+                      <span className="flex items-center gap-1 rounded-full bg-success px-2 py-0.5 text-[11px] font-medium text-success-foreground">
                         <Languages className="h-3 w-3" /> English guide
                       </span>
                     )}
                     {insured && (
-                      <span className="flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 text-[11px] text-muted-foreground">
+                      <span className="flex items-center gap-1 rounded-full bg-success px-2 py-0.5 text-[11px] font-medium text-success-foreground">
                         <Shield className="h-3 w-3" /> Insured
                       </span>
                     )}
@@ -83,7 +83,9 @@ export function PopularToursCarousel() {
                 {startingTier && (
                   <p className="mt-3 text-sm">
                     <span className="text-muted-foreground">From </span>
-                    <span className="font-mono font-bold text-primary">{startingTier.priceLabel}</span>
+                    <span className="font-mono text-lg font-extrabold text-primary">
+                      {startingTier.priceLabel}
+                    </span>
                     <span className="text-xs text-muted-foreground">
                       /{startingTier.unit === "per-boat" ? "boat" : "person"}
                     </span>
