@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MessageCircle } from "lucide-react";
 import { Hero } from "@/components/Hero";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ProductCard } from "@/components/ProductCard";
 import { categories, getCategory } from "@/data/categories";
 import { getToursByCategory } from "@/data/tours";
@@ -33,6 +34,7 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
 
   return (
     <>
+      <Breadcrumbs items={[{ label: "Tours", href: "/tours" }, { label: category.name }]} />
       <Hero
         theme={category.placeholderTheme}
         eyebrow="Tours"

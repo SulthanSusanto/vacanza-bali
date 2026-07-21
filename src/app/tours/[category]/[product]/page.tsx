@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Clock, MapPin } from "lucide-react";
 import { Hero } from "@/components/Hero";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { PriceSelector } from "@/components/PriceSelector";
 import { IncludeExcludeList } from "@/components/IncludeExcludeList";
 import { PlaceholderImage } from "@/components/PlaceholderImage";
@@ -40,6 +41,13 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
 
   return (
     <>
+      <Breadcrumbs
+        items={[
+          { label: "Tours", href: "/tours" },
+          { label: category.name, href: `/tours/${category.slug}` },
+          { label: tour.name },
+        ]}
+      />
       <Hero
         theme={category.placeholderTheme}
         eyebrow={category.name}
