@@ -1,8 +1,12 @@
 import Link from "next/link";
-import { ArrowRight, Clock } from "lucide-react";
+import { ArrowRight, Clock, Languages, Shield } from "lucide-react";
 import type { PlaceholderTheme, TourProduct } from "@/data/types";
 import { PlaceholderImage } from "@/components/PlaceholderImage";
 import { getStartingTier } from "@/lib/pricing";
+
+function hasTag(includes: string[], keyword: string): boolean {
+  return includes.some((item) => item.toLowerCase().includes(keyword));
+}
 
 export function ProductCard({
   tour,
@@ -12,34 +16,49 @@ export function ProductCard({
   theme: PlaceholderTheme;
 }) {
   const startingTier = getStartingTier(tour);
+  const englishGuide = hasTag(tour.includes, "english");
+  const insured = hasTag(tour.includes, "insurance");
 
   return (
     <Link
       href={`/tours/${tour.categorySlug}/${tour.slug}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow hover:shadow-lg sm:flex-row"
+      className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md sm:flex-row"
     >
       <PlaceholderImage
         theme={theme}
         label={tour.name}
         showCaption={false}
-        className="h-40 w-full sm:h-auto sm:w-56 sm:shrink-0"
+        className="h-36 w-full sm:h-auto sm:w-48 sm:shrink-0"
       />
-      <div className="flex flex-1 flex-col justify-between p-5">
+      <div className="flex flex-1 flex-col justify-between p-4">
         <div>
-          <h3 className="font-display text-lg font-semibold text-card-foreground">{tour.name}</h3>
-          <p className="mt-1.5 text-sm text-muted-foreground">{tour.summary}</p>
-          {(tour.duration || tour.pickupTime) && (
-            <p className="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground">
-              <Clock className="h-3.5 w-3.5" />
-              {tour.duration ?? tour.pickupTime}
-            </p>
-          )}
+          <h3 className="text-base font-semibold text-card-foreground">{tour.name}</h3>
+          <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{tour.summary}</p>
+
+          <div className="mt-2 flex flex-wrap gap-2">
+            {(tour.duration || tour.pickupTime) && (
+              <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                <Clock className="h-3.5 w-3.5" />
+                {tour.duration ?? tour.pickupTime}
+              </span>
+            )}
+            {englishGuide && (
+              <span className="flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 text-[11px] text-muted-foreground">
+                <Languages className="h-3 w-3" /> English guide
+              </span>
+            )}
+            {insured && (
+              <span className="flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 text-[11px] text-muted-foreground">
+                <Shield className="h-3 w-3" /> Insured
+              </span>
+            )}
+          </div>
         </div>
-        <div className="mt-4 flex items-end justify-between">
+        <div className="mt-3 flex items-end justify-between">
           {startingTier && (
             <p className="text-sm text-muted-foreground">
               From{" "}
-              <span className="font-mono text-base font-semibold text-primary">
+              <span className="font-mono text-base font-bold text-primary">
                 {startingTier.priceLabel}
               </span>
               <span className="text-xs">/{startingTier.unit === "per-boat" ? "boat" : "person"}</span>
