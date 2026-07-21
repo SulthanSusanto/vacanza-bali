@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { useMaskPositions } from "@/hooks/useMaskPositions";
 import { useImageWidth } from "@/hooks/useImageWidth";
 import { useIsMobile } from "@/hooks/useIsMobile";
@@ -60,6 +61,7 @@ export function ExperiencesSection() {
       name: displayName,
       num: startingTier ? formatShortPrice(startingTier.priceLabel) : "",
       active,
+      href: `/tours/${category}/${product}`,
     };
   });
 
@@ -156,9 +158,10 @@ export function ExperiencesSection() {
         >
           <div className="absolute inset-0 z-10 flex flex-wrap gap-1.5 p-2 md:flex-nowrap md:gap-2 md:p-3">
             {tourPackages.map((pkg) => (
-              <div
+              <Link
                 key={pkg.name}
-                className={`flex min-w-[calc(50%-4px)] flex-1 flex-col justify-between rounded-xl p-3 md:min-w-0 md:rounded-2xl md:p-5 ${
+                href={pkg.href}
+                className={`flex min-w-[calc(50%-4px)] flex-1 flex-col justify-between rounded-xl p-3 transition-transform hover:scale-[1.02] md:min-w-0 md:rounded-2xl md:p-5 ${
                   pkg.active ? "bg-white/90 backdrop-blur-md" : "bg-white/20 backdrop-blur-xl"
                 }`}
               >
@@ -176,7 +179,7 @@ export function ExperiencesSection() {
                 >
                   {pkg.num}
                 </span>
-              </div>
+              </Link>
             ))}
           </div>
         </MaskedCard>

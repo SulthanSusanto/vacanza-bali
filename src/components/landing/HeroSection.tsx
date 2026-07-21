@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { useStaggeredReveal } from "@/hooks/useStaggeredReveal";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 
@@ -67,15 +68,22 @@ export function HeroSection() {
           </h1>
         </div>
 
-        <a
-          href={WHATSAPP_HREF}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={reveal.getAnimStyle(3)}
-          className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-black transition-transform hover:scale-105 md:px-8 md:py-4 md:text-base"
-        >
-          Free Quote on WhatsApp
-        </a>
+        <div style={reveal.getAnimStyle(3)} className="mt-6 flex flex-wrap gap-3">
+          <a
+            href={WHATSAPP_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex w-fit items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-black transition-transform hover:scale-105 md:px-8 md:py-4 md:text-base"
+          >
+            Free Quote on WhatsApp
+          </a>
+          <Link
+            href="/tours"
+            className="inline-flex w-fit items-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 py-3.5 text-sm font-bold text-white backdrop-blur-sm transition-transform hover:scale-105 md:px-8 md:py-4 md:text-base"
+          >
+            See All Tours
+          </Link>
+        </div>
       </div>
     </section>
   );
