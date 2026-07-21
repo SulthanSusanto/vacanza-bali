@@ -18,7 +18,12 @@ export function ProductCard({
       href={`/tours/${tour.categorySlug}/${tour.slug}`}
       className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow hover:shadow-lg sm:flex-row"
     >
-      <PlaceholderImage theme={theme} label={tour.name} className="h-40 w-full sm:h-auto sm:w-56 sm:shrink-0" />
+      <PlaceholderImage
+        theme={theme}
+        label={tour.name}
+        showCaption={false}
+        className="h-40 w-full sm:h-auto sm:w-56 sm:shrink-0"
+      />
       <div className="flex flex-1 flex-col justify-between p-5">
         <div>
           <h3 className="font-display text-lg font-semibold text-card-foreground">{tour.name}</h3>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Languages, MessageCircle, Shield, Star, Users2 } from "lucide-react";
 import { SCENES } from "./scenes";
@@ -47,10 +48,22 @@ export function DayJourney() {
           <div
             key={scene.id}
             className="absolute inset-0 motion-safe:transition-opacity motion-safe:duration-700 motion-reduce:transition-none"
-            style={{ backgroundImage: scene.gradient, opacity: i === activeIndex ? 1 : 0 }}
-          />
+            style={{ opacity: i === activeIndex ? 1 : 0 }}
+          >
+            <Image
+              src={`https://picsum.photos/seed/${scene.id}/1920/1440`}
+              alt=""
+              fill
+              priority={i === 0}
+              sizes="100vw"
+              quality={60}
+              className="object-cover"
+            />
+            <div className="absolute inset-0 mix-blend-color" style={{ backgroundImage: scene.gradient }} />
+            <div className="absolute inset-0" style={{ backgroundImage: scene.gradient, opacity: 0.35 }} />
+          </div>
         ))}
-        <div className="absolute inset-0 bg-black/10" />
+        <div className="absolute inset-0 bg-black/25" />
       </div>
 
       {SCENES.map((scene, i) => (
@@ -147,15 +160,25 @@ function SceneCard({ category, large = false }: { category: TourCategory; large?
   return (
     <Link
       href={`/tours/${category.slug}`}
-      className={`group relative block overflow-hidden rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm transition-colors hover:bg-white/15 ${
-        large ? "p-8" : "p-6"
+      className={`group relative block overflow-hidden rounded-2xl border border-white/20 transition-transform hover:scale-[1.015] ${
+        large ? "min-h-64 p-8" : "min-h-48 p-6"
       }`}
     >
-      <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
+      <Image
+        src={`https://picsum.photos/seed/${category.slug}/800/600`}
+        alt=""
+        fill
+        sizes="(max-width: 640px) 100vw, 33vw"
+        quality={55}
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-black/45 transition-colors group-hover:bg-black/35" />
+      <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
+
       <h3 className={`relative font-display font-semibold text-white ${large ? "text-2xl" : "text-lg"}`}>
         {category.name}
       </h3>
-      <p className={`relative mt-2 text-white/80 ${large ? "text-base" : "text-sm"}`}>
+      <p className={`relative mt-2 text-white/85 ${large ? "text-base" : "text-sm"}`}>
         {category.tagline}
       </p>
       <span className="relative mt-4 inline-flex items-center gap-1 text-sm font-semibold text-white">

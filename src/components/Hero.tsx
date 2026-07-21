@@ -23,7 +23,8 @@ export function Hero({
     <section className="relative overflow-hidden">
       <PlaceholderImage
         theme={theme}
-        label={`${title} — photo coming soon`}
+        label={title}
+        showCaption={false}
         className={size === "lg" ? "h-[68vh] min-h-[420px] w-full" : "h-64 w-full"}
       />
       <div className="absolute inset-0 flex items-center bg-gradient-to-t from-black/60 via-black/20 to-transparent">

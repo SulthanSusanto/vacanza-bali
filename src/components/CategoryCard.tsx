@@ -9,7 +9,12 @@ export function CategoryCard({ category }: { category: TourCategory }) {
       href={`/tours/${category.slug}`}
       className="group block overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow hover:shadow-lg"
     >
-      <PlaceholderImage theme={category.placeholderTheme} label={category.name} className="h-44 w-full" />
+      <PlaceholderImage
+        theme={category.placeholderTheme}
+        label={category.name}
+        showCaption={false}
+        className="h-44 w-full"
+      />
       <div className="p-5">
         <h3 className="font-display text-lg font-semibold text-card-foreground">{category.name}</h3>
         <p className="mt-1.5 text-sm text-muted-foreground">{category.tagline}</p>
