@@ -22,7 +22,7 @@ export function ProductCard({
   return (
     <Link
       href={`/tours/${tour.categorySlug}/${tour.slug}`}
-      className="group flex flex-col overflow-hidden rounded-lg bg-card shadow-md shadow-black/5 transition-shadow hover:shadow-lg hover:shadow-black/10 sm:flex-row"
+      className="group flex flex-col overflow-hidden rounded-xl md:rounded-2xl bg-card shadow-md shadow-black/5 transition-shadow hover:shadow-lg hover:shadow-black/10 sm:flex-row"
     >
       <PlaceholderImage
         theme={theme}

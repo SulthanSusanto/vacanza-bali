@@ -66,8 +66,8 @@ function FerryTicketCard({ ticket }: { ticket: FerryTicket }) {
   );
 
   return (
-    <div className="rounded-2xl border border-border bg-card p-6">
-      <h3 className="font-display text-xl font-semibold text-card-foreground">{ticket.name}</h3>
+    <div className="rounded-2xl bg-card shadow-md shadow-black/5 p-6">
+      <h3 className="text-xl font-semibold text-card-foreground">{ticket.name}</h3>
       <p className="mt-1 text-sm text-muted-foreground">{ticket.route}</p>
 
       {ticket.notes?.map((note) => (

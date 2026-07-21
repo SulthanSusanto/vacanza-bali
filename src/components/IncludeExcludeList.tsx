@@ -13,7 +13,7 @@ export function IncludeExcludeList({
     <div className="grid gap-6 sm:grid-cols-2">
       {includes.length > 0 && (
         <div>
-          <h3 className="font-display text-base font-semibold text-foreground">Included</h3>
+          <h3 className="text-base font-bold text-foreground">Included</h3>
           <ul className="mt-3 space-y-2">
             {includes.map((item) => (
               <li key={item} className="flex items-start gap-2 text-sm text-foreground/90">
@@ -26,7 +26,7 @@ export function IncludeExcludeList({
       )}
       {excludes.length > 0 && (
         <div>
-          <h3 className="font-display text-base font-semibold text-foreground">Not included</h3>
+          <h3 className="text-base font-bold text-foreground">Not included</h3>
           <ul className="mt-3 space-y-2">
             {excludes.map((item) => (
               <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">

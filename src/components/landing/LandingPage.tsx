@@ -2,7 +2,7 @@
 
 import { useLayoutEffect, useState } from "react";
 import { SplashScreen } from "@/components/landing/SplashScreen";
-import { Navbar } from "@/components/landing/Navbar";
+import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { ExperiencesSection } from "@/components/landing/ExperiencesSection";
 import { FullDayToursSection } from "@/components/landing/FullDayToursSection";

@@ -34,7 +34,7 @@ export function Hero({
               {eyebrow}
             </p>
           )}
-          <h1 className="max-w-2xl font-display text-4xl font-semibold text-white sm:text-5xl">
+          <h1 className="max-w-2xl text-4xl font-extrabold text-white sm:text-5xl">
             {title}
           </h1>
           {subtitle && (

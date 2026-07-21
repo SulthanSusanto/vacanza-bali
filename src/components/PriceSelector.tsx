@@ -29,7 +29,7 @@ export function PriceSelector({ tour }: { tour: TourProduct }) {
   );
 
   return (
-    <div className="rounded-2xl border border-border bg-card p-5 sm:p-6">
+    <div className="rounded-2xl bg-card shadow-md shadow-black/5 p-5 sm:p-6">
       {hasGroups && groups.length > 1 && (
         <div className="mb-5">
           <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">

@@ -2,18 +2,18 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #111827;
+  --foreground: #000000;
   --card: #ffffff;
-  --card-foreground: #111827;
-  --primary: #0b5fff;
+  --card-foreground: #000000;
+  --primary: #000000;
   --primary-foreground: #ffffff;
-  --accent: #ff7a45;
+  --accent: #6b7280;
   --accent-foreground: #ffffff;
-  --success: #16a34a;
+  --success: #000000;
   --success-foreground: #ffffff;
-  --muted: #f3f4f6;
-  --muted-foreground: #6b7280;
-  --border: #e5e7eb;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --border: #e4e4e7;
 }
 
 @theme inline {
@@ -32,26 +32,14 @@
   --color-border: var(--border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-fraunces);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0b0f1a;
-    --foreground: #f3f4f6;
-    --card: #131826;
-    --card-foreground: #f3f4f6;
-    --primary: #4d8dff;
-    --primary-foreground: #0b0f1a;
-    --accent: #ff9166;
-    --accent-foreground: #0b0f1a;
-    --success: #4ade80;
-    --success-foreground: #0b0f1a;
-    --muted: #1c2333;
-    --muted-foreground: #9aa4b8;
-    --border: #262f42;
-  }
-}
+/*
+ * No dark-mode override: the whole site (not just the landing page) is a
+ * deliberately monochrome black/white/translucent-white design that should
+ * look the same regardless of system theme, matching the landing page's
+ * own explicit (non-token-based) black/white styling.
+ */
 
 body {
   background: var(--background);

@@ -8,8 +8,8 @@ export function Footer() {
     <footer className="border-t border-border bg-card">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-3 lg:px-8">
         <div>
-          <p className="font-display text-lg font-semibold text-card-foreground">
-            Vacanza <span className="text-primary">Bali</span>
+          <p className="text-lg font-extrabold uppercase tracking-tight text-card-foreground">
+            Vacanza Bali
           </p>
           <p className="mt-3 max-w-xs text-sm text-muted-foreground">
             Dolphin tours, waterfalls, sunrise treks and island-hopping boat tickets — booked

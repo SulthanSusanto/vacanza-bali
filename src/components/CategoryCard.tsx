@@ -30,7 +30,7 @@ export function CategoryCard({
   return (
     <Link
       href={`/tours/${category.slug}`}
-      className="group flex h-full flex-col overflow-hidden rounded-lg bg-card shadow-md shadow-black/5 transition-shadow hover:shadow-lg hover:shadow-black/10"
+      className="group flex h-full flex-col overflow-hidden rounded-xl md:rounded-2xl bg-card shadow-md shadow-black/5 transition-shadow hover:shadow-lg hover:shadow-black/10"
     >
       <PlaceholderImage
         theme={category.placeholderTheme}

@@ -45,9 +45,9 @@ export default function AboutPage() {
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-6 sm:grid-cols-2">
           {DIFFERENTIATORS.map(({ icon: Icon, title, body }) => (
-            <div key={title} className="rounded-2xl border border-border bg-card p-6">
+            <div key={title} className="rounded-2xl bg-card shadow-md shadow-black/5 p-6">
               <Icon className="h-7 w-7 text-primary" />
-              <h3 className="mt-4 font-display text-lg font-semibold text-card-foreground">{title}</h3>
+              <h3 className="mt-4 text-lg font-semibold text-card-foreground">{title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{body}</p>
             </div>
           ))}
@@ -56,26 +56,26 @@ export default function AboutPage() {
 
       <section className="border-t border-border bg-card">
         <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
-          <h2 className="font-display text-2xl font-semibold text-card-foreground sm:text-3xl">
+          <h2 className="text-2xl font-semibold text-card-foreground sm:text-3xl">
             How booking works
           </h2>
           <ol className="mt-8 grid gap-6 sm:grid-cols-3">
             <li>
-              <p className="font-display text-3xl font-semibold text-primary">1</p>
+              <p className="text-3xl font-semibold text-primary">1</p>
               <p className="mt-2 font-medium text-card-foreground">Browse a tour</p>
               <p className="mt-1 text-sm text-muted-foreground">
                 Pick a category, then a tour — every listing shows what&apos;s included.
               </p>
             </li>
             <li>
-              <p className="font-display text-3xl font-semibold text-primary">2</p>
+              <p className="text-3xl font-semibold text-primary">2</p>
               <p className="mt-2 font-medium text-card-foreground">Choose your group size</p>
               <p className="mt-1 text-sm text-muted-foreground">
                 Tap your headcount (and pickup area, if it applies) to see the real per-person price.
               </p>
             </li>
             <li>
-              <p className="font-display text-3xl font-semibold text-primary">3</p>
+              <p className="text-3xl font-semibold text-primary">3</p>
               <p className="mt-2 font-medium text-card-foreground">Book on WhatsApp</p>
               <p className="mt-1 text-sm text-muted-foreground">
                 Send the pre-filled message — we&apos;ll confirm your date and pickup details directly.

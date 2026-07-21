@@ -25,9 +25,9 @@ export default function ContactPage() {
       />
 
       <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="rounded-2xl border border-border bg-card p-8 text-center">
+        <div className="rounded-2xl bg-card shadow-md shadow-black/5 p-8 text-center">
           <MessageCircle className="mx-auto h-10 w-10 text-primary" />
-          <h2 className="mt-4 font-display text-2xl font-semibold text-card-foreground">
+          <h2 className="mt-4 text-2xl font-semibold text-card-foreground">
             Chat with us on WhatsApp
           </h2>
           <p className="mt-2 font-mono text-lg text-card-foreground">+62 812-5332-0304</p>
@@ -51,7 +51,7 @@ export default function ContactPage() {
             href="https://www.instagram.com/vacanza_balitour"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 hover:border-primary"
+            className="flex items-center gap-3 rounded-2xl bg-card shadow-md shadow-black/5 p-5 hover:shadow-lg hover:shadow-black/10"
           >
             <InstagramIcon className="h-6 w-6 text-primary" />
             <div>
@@ -63,7 +63,7 @@ export default function ContactPage() {
             href="https://www.tiktok.com/@vacanzabali"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 rounded-2xl border border-border bg-card p-5 hover:border-primary"
+            className="flex items-center gap-3 rounded-2xl bg-card shadow-md shadow-black/5 p-5 hover:shadow-lg hover:shadow-black/10"
           >
             <TikTokIcon className="h-6 w-6 text-primary" />
             <div>
