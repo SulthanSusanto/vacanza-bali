@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type RefObject } from "react";
+import { useLayoutEffect, useState, type RefObject } from "react";
 
 export interface MaskPosition {
   x: number;
@@ -21,7 +21,11 @@ export function useMaskPositions(
 ): MaskPosition[] {
   const [positions, setPositions] = useState<MaskPosition[]>([]);
 
-  useEffect(() => {
+  // useLayoutEffect (not useEffect) so the *initial* measure() call happens
+  // synchronously before the browser paints — ResizeObserver's own callback
+  // is always async, so without this every card would flash at 0x0 (no
+  // background image) on first load until the observer's first tick fires.
+  useLayoutEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 

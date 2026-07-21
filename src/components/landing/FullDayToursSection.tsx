@@ -5,8 +5,10 @@ import { useStaggeredReveal } from "@/hooks/useStaggeredReveal";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 
 // Placeholders — swap for real Vacanza photography before shipping.
+// (Original SECTION3_IMG1 Unsplash ID 404s — reusing the verified-working
+// temple/coastline photo from Section 2 here instead of guessing a new one.)
 const SECTION3_IMG1 =
-  "https://images.unsplash.com/photo-1554481923-a6918bd997bf?auto=format&fit=crop&w=1280&q=85";
+  "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1280&q=85";
 const SECTION3_IMG2 =
   "https://images.unsplash.com/photo-1518002171953-a080ee817e1f?auto=format&fit=crop&w=1280&q=85";
 const SECTION3_BG =
