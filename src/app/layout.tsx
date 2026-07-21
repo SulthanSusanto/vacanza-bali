@@ -39,16 +39,16 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} h-full antialiased`}
     >
-      {/* React/Next.js hoist <link> tags rendered anywhere in the tree to <head>. */}
-      <link
-        href="https://db.onlinewebfonts.com/c/1cd1e7d71e048159076fd90b39846902?family=Open+Sauce+One"
-        rel="stylesheet"
-      />
-      <link
-        href="https://db.onlinewebfonts.com/c/42acf9aa4a6dc2f2886a3f682e337ead?family=Open+Sauce+One+Bold"
-        rel="stylesheet"
-      />
       <body className="flex min-h-full flex-col">
+        {/* React/Next.js hoist <link> tags rendered anywhere in the tree to <head>. */}
+        <link
+          href="https://db.onlinewebfonts.com/c/1cd1e7d71e048159076fd90b39846902?family=Open+Sauce+One"
+          rel="stylesheet"
+        />
+        <link
+          href="https://db.onlinewebfonts.com/c/42acf9aa4a6dc2f2886a3f682e337ead?family=Open+Sauce+One+Bold"
+          rel="stylesheet"
+        />
         <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
