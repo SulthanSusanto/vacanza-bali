@@ -6,6 +6,7 @@ import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { ExperiencesSection } from "@/components/landing/ExperiencesSection";
 import { FullDayToursSection } from "@/components/landing/FullDayToursSection";
+import { LandingFooter } from "@/components/landing/LandingFooter";
 
 const SPLASH_SESSION_KEY = "vacanza-splash-shown";
 
@@ -41,6 +42,7 @@ export function LandingPage() {
       <HeroSection />
       <ExperiencesSection />
       <FullDayToursSection />
+      <LandingFooter />
     </div>
   );
 }
