@@ -68,7 +68,7 @@ export function ExperiencesSection() {
   return (
     <section
       ref={sectionRef}
-      className="flex min-h-screen w-full flex-col gap-1.5 overflow-hidden px-3 pb-1.5 pt-1.5 md:h-screen md:gap-2 md:px-5 md:pb-2 md:pt-2"
+      className="flex min-h-[100dvh] w-full flex-col gap-1.5 overflow-hidden px-3 pb-1.5 pt-1.5 md:h-[100dvh] md:gap-2 md:px-5 md:pb-2 md:pt-2"
     >
       <div className="grid min-h-0 flex-1 grid-cols-1 grid-rows-[auto_auto_auto_auto] gap-1.5 md:grid-cols-2 md:grid-rows-[1fr_1fr_0.8fr] md:gap-2">
         {/* Card 0 — Bali Experiences */}
@@ -81,7 +81,8 @@ export function ExperiencesSection() {
           position={positions[0]}
           imageWidth={imageWidth}
           focalX={focalX}
-          className="relative min-h-[160px] overflow-hidden rounded-xl md:min-h-0 md:rounded-2xl"
+          isMobile={isMobile}
+          className="relative min-h-[120px] overflow-hidden rounded-xl md:min-h-0 md:rounded-2xl"
           style={reveal.getAnimStyle(0)}
         >
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/30" />
@@ -103,7 +104,8 @@ export function ExperiencesSection() {
           position={positions[1]}
           imageWidth={imageWidth}
           focalX={focalX}
-          className="relative min-h-[200px] overflow-hidden rounded-xl md:min-h-0 md:rounded-2xl md:row-span-2"
+          isMobile={isMobile}
+          className="relative min-h-[150px] overflow-hidden rounded-xl md:min-h-0 md:rounded-2xl md:row-span-2"
           style={reveal.getAnimStyle(1)}
         >
           <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-black/35" />
@@ -132,7 +134,8 @@ export function ExperiencesSection() {
           position={positions[2]}
           imageWidth={imageWidth}
           focalX={focalX}
-          className="relative min-h-[160px] overflow-hidden rounded-xl md:min-h-0 md:rounded-2xl"
+          isMobile={isMobile}
+          className="relative min-h-[120px] overflow-hidden rounded-xl md:min-h-0 md:rounded-2xl"
           style={reveal.getAnimStyle(2)}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/5 to-black/30" />
@@ -153,15 +156,19 @@ export function ExperiencesSection() {
           position={positions[3]}
           imageWidth={imageWidth}
           focalX={focalX}
-          className="relative min-h-[200px] overflow-hidden rounded-xl md:col-span-2 md:min-h-0 md:rounded-2xl"
+          isMobile={isMobile}
+          className="relative min-h-[180px] overflow-hidden rounded-xl md:col-span-2 md:min-h-0 md:rounded-2xl"
           style={reveal.getAnimStyle(3)}
         >
-          <div className="absolute inset-0 z-10 flex flex-wrap gap-1.5 p-2 md:flex-nowrap md:gap-2 md:p-3">
+          {/* Horizontal scroll on mobile (4 cards stacked as a 2x2 wrap ate
+              two full rows of an already-tight mobile section) — reverts to
+              the original nowrap flex row at md, unchanged from before. */}
+          <div className="absolute inset-0 z-10 flex gap-1.5 overflow-x-auto p-2 [-ms-overflow-style:none] [scrollbar-width:none] md:flex-nowrap md:gap-2 md:overflow-visible md:p-3 [&::-webkit-scrollbar]:hidden">
             {tourPackages.map((pkg) => (
               <Link
                 key={pkg.name}
                 href={pkg.href}
-                className={`flex min-w-[calc(50%-4px)] flex-1 flex-col justify-between rounded-xl p-3 transition-transform hover:scale-[1.02] md:min-w-0 md:rounded-2xl md:p-5 ${
+                className={`flex w-36 shrink-0 flex-col justify-between rounded-xl p-3 transition-transform hover:scale-[1.02] md:w-auto md:min-w-0 md:flex-1 md:rounded-2xl md:p-5 ${
                   pkg.active ? "bg-white/90 backdrop-blur-md" : "bg-white/20 backdrop-blur-xl"
                 }`}
               >
@@ -173,7 +180,7 @@ export function ExperiencesSection() {
                   {pkg.name}
                 </h3>
                 <span
-                  className={`flex items-center justify-center self-end whitespace-nowrap rounded-full border px-3 py-1.5 text-[10px] font-semibold md:px-4 md:py-2 md:text-xs ${
+                  className={`flex items-center justify-center self-end whitespace-nowrap rounded-full border px-3 py-1.5 text-xs font-semibold md:px-4 md:py-2 ${
                     pkg.active ? "border-black text-black" : "border-white text-white"
                   }`}
                 >

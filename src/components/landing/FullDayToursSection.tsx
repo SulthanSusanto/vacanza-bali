@@ -46,13 +46,13 @@ export function FullDayToursSection() {
   return (
     <section
       ref={sectionRef}
-      className="flex min-h-screen w-full flex-col gap-1.5 overflow-hidden px-3 pb-1.5 pt-1.5 md:h-screen md:gap-2 md:px-5 md:pb-2 md:pt-2"
+      className="flex min-h-[100dvh] w-full flex-col gap-1.5 overflow-hidden px-3 pb-1.5 pt-1.5 md:h-[100dvh] md:gap-2 md:px-5 md:pb-2 md:pt-2"
     >
       <div className="grid min-h-0 flex-1 grid-cols-1 gap-1.5 md:grid-cols-2 md:gap-2">
         <div className="flex flex-col gap-1.5 md:gap-2">
           <div
             style={reveal.getAnimStyle(0)}
-            className="flex min-h-[180px] flex-[1.2] flex-col justify-between rounded-xl bg-stone-50 p-5 md:min-h-0 md:rounded-2xl md:p-7"
+            className="flex min-h-[140px] flex-[1.2] flex-col justify-between rounded-xl bg-stone-50 p-5 md:min-h-0 md:rounded-2xl md:p-7"
           >
             <h2 className="text-[clamp(3rem,7vw,6.5rem)] font-bold leading-[0.95] text-black">
               Full-Day
@@ -66,7 +66,7 @@ export function FullDayToursSection() {
 
           <div
             style={reveal.getAnimStyle(1)}
-            className="flex min-h-[140px] flex-1 gap-1.5 md:min-h-0 md:gap-2"
+            className="flex min-h-[110px] flex-1 gap-1.5 md:min-h-0 md:gap-2"
           >
             <div className="flex-1 overflow-hidden rounded-xl md:rounded-2xl">
               <img
@@ -86,7 +86,7 @@ export function FullDayToursSection() {
 
           <div
             style={reveal.getAnimStyle(2)}
-            className="flex min-h-[160px] flex-[0.8] items-end justify-between rounded-xl bg-zinc-200 p-5 md:min-h-0 md:rounded-2xl md:p-7"
+            className="flex min-h-[130px] flex-[0.8] items-end justify-between rounded-xl bg-zinc-200 p-5 md:min-h-0 md:rounded-2xl md:p-7"
           >
             <div>
               <p className="mb-2 text-xs font-semibold text-black md:mb-3 md:text-sm">
@@ -113,7 +113,7 @@ export function FullDayToursSection() {
 
         <div
           style={reveal.getAnimStyle(3)}
-          className="relative min-h-[350px] overflow-hidden rounded-xl md:min-h-0 md:rounded-2xl"
+          className="relative min-h-[280px] overflow-hidden rounded-xl md:min-h-0 md:rounded-2xl"
         >
           <img
             src={SECTION3_BG}

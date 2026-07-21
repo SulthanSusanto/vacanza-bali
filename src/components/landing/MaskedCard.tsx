@@ -12,6 +12,7 @@ export function MaskedCard({
   position,
   imageWidth,
   focalX,
+  isMobile,
   className,
   children,
   cardRef,
@@ -23,6 +24,14 @@ export function MaskedCard({
   position?: MaskPosition;
   imageWidth: number;
   focalX: number;
+  /**
+   * On mobile, cards are stacked and scrolled one at a time — you never see
+   * two cards adjacent, so the shared-mosaic effect (the whole point of the
+   * windowing math below) is never actually visible. Fall back to a plain
+   * cover/center background instead of computing it, which also skips the
+   * measurement work on the devices least able to afford it.
+   */
+  isMobile?: boolean;
   className?: string;
   children?: ReactNode;
   cardRef?: Ref<HTMLDivElement>;
@@ -33,26 +42,37 @@ export function MaskedCard({
   const x = position?.x ?? 0;
   const y = position?.y ?? 0;
 
-  // imageWidth is the image's width when scaled to fill the section's
-  // *height*. On wide-but-not-very-tall viewports that can come out
-  // narrower than the section itself — with background-repeat:no-repeat
-  // that leaves a blank gap. Scale up (preserving aspect ratio, derived
-  // from imageWidth/sh) so the rendered width never falls below sw; only
-  // kicks in when the height-based scale wasn't already wide enough.
-  const aspect = sh > 0 ? imageWidth / sh : 0;
-  const renderHeight = aspect > 0 ? Math.max(sh, sw / aspect) : sh;
-  const renderWidth = aspect > 0 ? renderHeight * aspect : imageWidth;
+  let backgroundStyle: CSSProperties;
 
-  const overflow = renderWidth > sw ? renderWidth - sw : 0;
-  const focalOffset = overflow * focalX;
+  if (isMobile) {
+    backgroundStyle = {
+      backgroundImage: `url(${bgImage})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      ...style,
+    };
+  } else {
+    // imageWidth is the image's width when scaled to fill the section's
+    // *height*. On wide-but-not-very-tall viewports that can come out
+    // narrower than the section itself — with background-repeat:no-repeat
+    // that leaves a blank gap. Scale up (preserving aspect ratio, derived
+    // from imageWidth/sh) so the rendered width never falls below sw; only
+    // kicks in when the height-based scale wasn't already wide enough.
+    const aspect = sh > 0 ? imageWidth / sh : 0;
+    const renderHeight = aspect > 0 ? Math.max(sh, sw / aspect) : sh;
+    const renderWidth = aspect > 0 ? renderHeight * aspect : imageWidth;
 
-  const backgroundStyle: CSSProperties = {
-    backgroundImage: `url(${bgImage})`,
-    backgroundSize: `auto ${renderHeight}px`,
-    backgroundPosition: `-${x + focalOffset}px -${y}px`,
-    backgroundRepeat: "no-repeat",
-    ...style,
-  };
+    const overflow = renderWidth > sw ? renderWidth - sw : 0;
+    const focalOffset = overflow * focalX;
+
+    backgroundStyle = {
+      backgroundImage: `url(${bgImage})`,
+      backgroundSize: `auto ${renderHeight}px`,
+      backgroundPosition: `-${x + focalOffset}px -${y}px`,
+      backgroundRepeat: "no-repeat",
+      ...style,
+    };
+  }
 
   return (
     <div ref={cardRef} className={className} style={backgroundStyle}>

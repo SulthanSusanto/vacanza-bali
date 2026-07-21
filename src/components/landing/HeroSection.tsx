@@ -24,7 +24,7 @@ export function HeroSection() {
   const reveal = useStaggeredReveal(sectionRef);
 
   return (
-    <section ref={sectionRef} className="relative h-screen w-full overflow-hidden">
+    <section ref={sectionRef} className="relative h-[100dvh] w-full overflow-hidden">
       <img
         src={HERO_IMAGE}
         alt="Bali temple at sunrise"
@@ -37,11 +37,14 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/50" />
 
       <div className="relative z-10 flex h-full flex-col px-4 pb-8 pt-24 md:px-8 md:pb-14 md:pt-28">
-        <div style={reveal.getAnimStyle(0)} className="flex flex-wrap gap-2 md:gap-3">
+        <div
+          style={reveal.getAnimStyle(0)}
+          className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] md:flex-wrap md:gap-3 md:overflow-visible md:pb-0 [&::-webkit-scrollbar]:hidden"
+        >
           {FEATURE_BARS.map((label) => (
             <span
               key={label}
-              className="rounded-full border border-white/40 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-sm md:px-4 md:text-sm"
+              className="shrink-0 whitespace-nowrap rounded-full border border-white/40 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur-sm md:px-4 md:text-sm"
             >
               {label}
             </span>
