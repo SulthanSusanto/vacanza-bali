@@ -7,7 +7,11 @@ import { THEME_STYLES, slugify } from "@/lib/theme-icons";
  * Temporary stand-in photography (seeded via picsum.photos, a free-license
  * placeholder-photo service) until real tour photos land in public/. Swap
  * the <Image src> for a real asset per tour/category when available — the
- * tint + label layer can stay as-is.
+ * tint + label layer can stay as-is. `unoptimized` skips Next's image proxy
+ * (dozens of unique picsum seeds otherwise get routed through Next's
+ * upstream-fetch-and-resize pipeline, which times out under load) — drop it
+ * once these are real local assets, since local images should go through
+ * Next's optimizer normally.
  */
 export function PlaceholderImage({
   theme,
@@ -37,6 +41,7 @@ export function PlaceholderImage({
         fill
         sizes="(max-width: 640px) 100vw, 50vw"
         className="object-cover"
+        unoptimized
       />
       <div className={`absolute inset-0 mix-blend-color bg-gradient-to-br ${tint}`} />
       {showCaption && (

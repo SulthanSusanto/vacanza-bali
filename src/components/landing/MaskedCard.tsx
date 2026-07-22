@@ -13,6 +13,7 @@ export function MaskedCard({
   imageWidth,
   focalX,
   isMobile,
+  mobileBackgroundPosition,
   className,
   children,
   cardRef,
@@ -28,10 +29,17 @@ export function MaskedCard({
    * On mobile, cards are stacked and scrolled one at a time — you never see
    * two cards adjacent, so the shared-mosaic effect (the whole point of the
    * windowing math below) is never actually visible. Fall back to a plain
-   * cover/center background instead of computing it, which also skips the
+   * cover background instead of computing it, which also skips the
    * measurement work on the devices least able to afford it.
    */
   isMobile?: boolean;
+  /**
+   * Several cards on a section can share one bgImage (mosaic technique) — on
+   * mobile that collapses to plain cover, so without a per-card offset every
+   * one of them would render the exact same centered crop back to back.
+   * Defaults to "center" for single-image cards where that's a non-issue.
+   */
+  mobileBackgroundPosition?: string;
   className?: string;
   children?: ReactNode;
   cardRef?: Ref<HTMLDivElement>;
@@ -48,7 +56,7 @@ export function MaskedCard({
     backgroundStyle = {
       backgroundImage: `url(${bgImage})`,
       backgroundSize: "cover",
-      backgroundPosition: "center",
+      backgroundPosition: mobileBackgroundPosition ?? "center",
       ...style,
     };
   } else {

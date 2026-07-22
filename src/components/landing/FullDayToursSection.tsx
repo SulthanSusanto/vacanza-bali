@@ -10,7 +10,7 @@ import { buildWhatsAppLink } from "@/lib/whatsapp";
 const SECTION3_IMG1 =
   "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1280&q=85";
 const SECTION3_IMG2 =
-  "https://images.unsplash.com/photo-1518002171953-a080ee817e1f?auto=format&fit=crop&w=1280&q=85";
+  "https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=1280&q=85";
 const SECTION3_BG =
   "https://images.unsplash.com/photo-1573790387438-4da905039392?auto=format&fit=crop&w=1280&q=85";
 
@@ -46,9 +46,14 @@ export function FullDayToursSection() {
   return (
     <section
       ref={sectionRef}
-      className="flex min-h-[100dvh] w-full flex-col gap-1.5 overflow-hidden px-3 pb-1.5 pt-1.5 md:h-[100dvh] md:gap-2 md:px-5 md:pb-2 md:pt-2"
+      className="flex w-full flex-col gap-1.5 overflow-hidden px-3 pb-1.5 pt-1.5 md:h-[100dvh] md:gap-2 md:px-5 md:pb-2 md:pt-2"
     >
-      <div className="grid min-h-0 flex-1 grid-cols-1 gap-1.5 md:grid-cols-2 md:gap-2">
+      {/* Same fix as ExperiencesSection: no forced min-h-[100dvh] on mobile.
+          Grid items stretch to fill their row by default, which was handing
+          the left column's flex-[1.2]/flex-1/flex-[0.8] children extra
+          height to grow into whenever the section got inflated to a full
+          viewport — undoing the compact min-heights below. */}
+      <div className="grid min-h-0 flex-1 content-start items-start grid-cols-1 gap-1.5 md:grid-cols-2 md:items-stretch md:gap-2">
         <div className="flex flex-col gap-1.5 md:gap-2">
           <div
             style={reveal.getAnimStyle(0)}
@@ -118,7 +123,7 @@ export function FullDayToursSection() {
           <img
             src={SECTION3_BG}
             alt="Kelingking Beach cliff view, Nusa Penida"
-            className="h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover"
           />
 
           <div className="absolute bottom-3 left-3 right-3 flex gap-1.5 md:bottom-5 md:left-5 md:right-5 md:gap-2">

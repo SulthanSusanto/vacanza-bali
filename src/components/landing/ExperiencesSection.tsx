@@ -15,6 +15,14 @@ import { buildWhatsAppLink } from "@/lib/whatsapp";
 const SECTION2_IMAGE =
   "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1920&q=85";
 
+// On mobile the 4 cards below fall back to a plain cover background (see
+// MaskedCard's isMobile branch) instead of the desktop windowing math, but
+// they all share SECTION2_IMAGE — without an offset per card they'd all show
+// the exact same centered crop stacked back to back. Cheap fix: cycle a
+// distinct crop per card instead of reintroducing the measurement-based
+// windowing on mobile.
+const MOBILE_CROPS = ["30% 25%", "70% 15%", "50% 65%", "20% 70%"];
+
 // These four are the landing-page signature picks — real pricing pulled
 // from src/data/tours.ts (the source of truth) so this can't drift stale.
 // Full pricelist covers 10 categories with per-group-size tiers, see /tours.
@@ -68,9 +76,17 @@ export function ExperiencesSection() {
   return (
     <section
       ref={sectionRef}
-      className="flex min-h-[100dvh] w-full flex-col gap-1.5 overflow-hidden px-3 pb-1.5 pt-1.5 md:h-[100dvh] md:gap-2 md:px-5 md:pb-2 md:pt-2"
+      className="flex w-full flex-col gap-1.5 overflow-hidden px-3 pb-1.5 pt-1.5 md:h-[100dvh] md:gap-2 md:px-5 md:pb-2 md:pt-2"
     >
-      <div className="grid min-h-0 flex-1 grid-cols-1 grid-rows-[auto_auto_auto_auto] gap-1.5 md:grid-cols-2 md:grid-rows-[1fr_1fr_0.8fr] md:gap-2">
+      {/* No min-h-[100dvh] on mobile: that forced this flex column to at
+          least one full viewport, and since the grid below is flex-1 with
+          auto-sized rows, Grid's default align-content:stretch inflated
+          every card well past its min-height to fill the leftover space —
+          the compact mobile heights below were being silently overridden.
+          Letting the section size to its (now-compact) content and packing
+          rows at content-start keeps them honest. Desktop keeps h-[100dvh]
+          with fr-based rows, which aren't subject to this. */}
+      <div className="grid min-h-0 flex-1 content-start grid-cols-1 grid-rows-[auto_auto_auto_auto] gap-1.5 md:grid-cols-2 md:grid-rows-[1fr_1fr_0.8fr] md:gap-2">
         {/* Card 0 — Bali Experiences */}
         <MaskedCard
           cardRef={(el) => {
@@ -82,6 +98,7 @@ export function ExperiencesSection() {
           imageWidth={imageWidth}
           focalX={focalX}
           isMobile={isMobile}
+          mobileBackgroundPosition={MOBILE_CROPS[0]}
           className="relative min-h-[120px] overflow-hidden rounded-xl md:min-h-0 md:rounded-2xl"
           style={reveal.getAnimStyle(0)}
         >
@@ -105,6 +122,7 @@ export function ExperiencesSection() {
           imageWidth={imageWidth}
           focalX={focalX}
           isMobile={isMobile}
+          mobileBackgroundPosition={MOBILE_CROPS[1]}
           className="relative min-h-[150px] overflow-hidden rounded-xl md:min-h-0 md:rounded-2xl md:row-span-2"
           style={reveal.getAnimStyle(1)}
         >
@@ -135,6 +153,7 @@ export function ExperiencesSection() {
           imageWidth={imageWidth}
           focalX={focalX}
           isMobile={isMobile}
+          mobileBackgroundPosition={MOBILE_CROPS[2]}
           className="relative min-h-[120px] overflow-hidden rounded-xl md:min-h-0 md:rounded-2xl"
           style={reveal.getAnimStyle(2)}
         >
@@ -157,6 +176,7 @@ export function ExperiencesSection() {
           imageWidth={imageWidth}
           focalX={focalX}
           isMobile={isMobile}
+          mobileBackgroundPosition={MOBILE_CROPS[3]}
           className="relative min-h-[180px] overflow-hidden rounded-xl md:col-span-2 md:min-h-0 md:rounded-2xl"
           style={reveal.getAnimStyle(3)}
         >

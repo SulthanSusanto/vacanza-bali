@@ -9,7 +9,7 @@ import { buildWhatsAppLink } from "@/lib/whatsapp";
 // treks, rice terraces) before shipping; generic stock undercuts a real
 // tour brand's credibility.
 const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1920&q=85";
+  "https://images.unsplash.com/photo-1510037056621-d2508afab0dd?auto=format&fit=crop&w=1920&q=85";
 
 const FEATURE_BARS = [
   "Private English-Speaking Drivers",
@@ -27,7 +27,7 @@ export function HeroSection() {
     <section ref={sectionRef} className="relative h-[100dvh] w-full overflow-hidden">
       <img
         src={HERO_IMAGE}
-        alt="Bali temple at sunrise"
+        alt="Hiker with backpack watching sunrise over Mount Agung from the Mount Batur trekking route"
         fetchPriority="high"
         className="absolute inset-0 h-full w-full object-cover object-[75%_center]"
       />
