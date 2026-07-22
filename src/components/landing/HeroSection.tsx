@@ -65,9 +65,9 @@ export function HeroSection() {
             Trusted Tour Operator in Bali
           </span>
           <h1 className="text-[clamp(3rem,11vw,10rem)] font-bold leading-[0.85] tracking-tight text-white">
-            Explore
+            Private
             <br />
-            Bali
+            Tours
           </h1>
         </div>
 

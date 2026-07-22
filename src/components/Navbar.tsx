@@ -150,7 +150,7 @@ export function Navbar() {
                 rel="noopener noreferrer"
                 className="block w-full rounded-full bg-black px-6 py-4 text-center text-sm font-semibold text-white transition-colors duration-200 hover:bg-neutral-800"
               >
-                Chat on WhatsApp
+                Book via WhatsApp
               </a>
               <div className="mt-4 flex gap-4 text-sm text-neutral-600">
                 <a

@@ -18,6 +18,9 @@ const WHATSAPP_CUSTOM_HREF = buildWhatsAppLink(
   "Hi Vacanza Bali, I'd like to put together a custom tour package."
 );
 const WHATSAPP_PLAN_HREF = buildWhatsAppLink("Hi Vacanza Bali, I'd like to start planning my trip.");
+const WHATSAPP_INFO_HREF = buildWhatsAppLink(
+  "Hi Vacanza Bali, what should I know or bring before booking a tour?"
+);
 
 function ArrowIcon({ className }: { className?: string }) {
   return (
@@ -145,7 +148,12 @@ export function FullDayToursSection() {
               </span>
             </a>
 
-            <div className="flex h-36 flex-1 flex-col justify-between rounded-xl bg-white/20 p-3 backdrop-blur-xl md:h-52 md:rounded-2xl md:p-5">
+            <a
+              href={WHATSAPP_INFO_HREF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-36 flex-1 flex-col justify-between rounded-xl bg-white/20 p-3 backdrop-blur-xl md:h-52 md:rounded-2xl md:p-5"
+            >
               <h4 className="text-lg font-bold leading-5 text-white md:text-2xl md:leading-7">
                 What to
                 <br />
@@ -156,7 +164,7 @@ export function FullDayToursSection() {
               <span className="flex h-9 w-9 items-center justify-center self-end rounded-full border border-white md:h-12 md:w-12">
                 <ArrowIcon className="text-white" />
               </span>
-            </div>
+            </a>
           </div>
         </div>
       </div>

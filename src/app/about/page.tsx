@@ -3,7 +3,7 @@ import { Languages, MessagesSquare, Shield, UserCheck } from "lucide-react";
 import { Hero } from "@/components/Hero";
 
 export const metadata: Metadata = {
-  title: "About / Why Us",
+  title: "Why Vacanza Bali",
   description:
     "Why travelers book Bali tours direct with Vacanza Bali: English-speaking guides, insured activities, and real per-person pricing.",
 };

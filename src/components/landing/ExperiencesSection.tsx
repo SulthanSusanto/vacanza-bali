@@ -107,7 +107,7 @@ export function ExperiencesSection() {
             Bali Experiences
           </h2>
           <p className="absolute bottom-4 left-5 z-10 text-xs font-semibold text-white md:bottom-6 md:left-7 md:text-sm">
-            Our most-loved day trips
+            Handpicked day trips, booked direct
           </p>
         </MaskedCard>
 

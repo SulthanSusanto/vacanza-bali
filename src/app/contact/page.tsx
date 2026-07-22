@@ -42,7 +42,7 @@ export default function ContactPage() {
             className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground hover:opacity-90"
           >
             <MessageCircle className="h-5 w-5" />
-            Start a WhatsApp chat
+            Chat on WhatsApp
           </a>
         </div>
 

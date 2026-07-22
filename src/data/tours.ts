@@ -83,7 +83,7 @@ export const tours: TourProduct[] = [
   {
     slug: "ubud-day-trip-a",
     categorySlug: "ubud-trip",
-    name: "Ubud Day Trip - A",
+    name: "Ubud Waterfall, ATV & Alas Harum Day Trip",
     summary: "Manuaba Waterfall, single ATV/Quad-Bike, then Alas Harum's swings and photo spots.",
     description:
       "Start at Manuaba Waterfall — a hidden gem with two falls — then ride an ATV/Quad-Bike through Belong village, rice fields, mud tracks and a dragon cave to its own waterfall, before finishing at Alas Harum (Cretya): the Luwak coffee process, swings, photo spots, the dancing bridge and Soekarno bamboo statue, and a pool.",
@@ -120,7 +120,7 @@ export const tours: TourProduct[] = [
   {
     slug: "ubud-day-trip-b",
     categorySlug: "ubud-trip",
-    name: "Ubud Day Trip - B",
+    name: "Ubud ATV, Coffee Plantation & Tegenungan Falls",
     summary: "ATV/Quad-Bike, a coffee plantation, Tegenungan Waterfall and a pool club overlook.",
     description:
       "Ride the ATV/Quad-Bike, stop at a Coffee Plantation for the Luwak coffee process plus free coffee/tea tasting, visit Tegenungan Waterfall — at 15m, the highest near Ubud — and finish at Omma Day Club, a pool restaurant overlooking the falls.",
@@ -151,7 +151,7 @@ export const tours: TourProduct[] = [
   {
     slug: "ubud-day-trip-c",
     categorySlug: "ubud-trip",
-    name: "Ubud Day Trip - C",
+    name: "Ubud ATV & Ayung River Rafting",
     summary: "ATV/Quad-Bike followed by whitewater rafting on the Ayung River.",
     description:
       "Ride a single ATV/Quad-Bike, then raft 12km of the Ayung River over roughly 2.5 hours with a professional guide.",
@@ -450,7 +450,7 @@ export const tours: TourProduct[] = [
   {
     slug: "uluwatu-day-trip-a",
     categorySlug: "uluwatu-trip",
-    name: "Uluwatu Day Trip - A",
+    name: "Uluwatu Temple, Beaches & Kecak Fire Dance",
     summary: "Uluwatu Temple, Padang Padang & Melasti beaches, and the Kecak fire dance at sunset.",
     description:
       "Uluwatu Temple's cliff-top sunset views, Padang Padang Beach (of Eat Pray Love fame), Melasti Beach's white sand and cliffs, then the Kecak fire dance show at sunset.",
@@ -498,7 +498,7 @@ export const tours: TourProduct[] = [
   {
     slug: "uluwatu-day-trip-b",
     categorySlug: "uluwatu-trip",
-    name: "Uluwatu Day Trip - B",
+    name: "Uluwatu Temple & Beach Hopping",
     summary: "Uluwatu Temple plus your pick of up to three beaches.",
     description:
       "Uluwatu Temple, then beach hopping — choose up to three beaches, or ask your guide for suggestions.",
