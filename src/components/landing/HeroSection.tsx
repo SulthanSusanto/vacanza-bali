@@ -1,36 +1,106 @@
-"use client";
+'use client';
 
-import { useRef } from "react";
-import Link from "next/link";
-import { useStaggeredReveal } from "@/hooks/useStaggeredReveal";
-import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useStaggeredReveal } from '@/hooks/useStaggeredReveal';
+import { buildWhatsAppLink } from '@/lib/whatsapp';
 
-// Placeholder — swap for Vacanza's own photography (Lovina dolphins, sunrise
-// treks, rice terraces) before shipping; generic stock undercuts a real
-// tour brand's credibility.
-const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1510037056621-d2508afab0dd?auto=format&fit=crop&w=1920&q=85";
-
-const FEATURE_BARS = [
-  "Private English-Speaking Drivers",
-  "Small-Group & Shared Pricing",
-  "Book Direct via WhatsApp",
+const SLIDES = [
+  {
+    src: '/photos/mt-batur/sunrise-above-clouds.webp',
+    alt: 'Sunrise trekking above the clouds at Mt. Batur',
+  },
+  {
+    src: '/photos/dolphin-tour/dolphins-jumping-pod.webp',
+    alt: 'Wild dolphins at play near Lovina',
+  },
+  {
+    src: '/photos/ubud-trip/guests/atv-waterfall-splash.webp',
+    alt: 'A guest riding an ATV through a waterfall on an Ubud day trip',
+  },
+  {
+    src: '/photos/nusa-penida/kelingking-beach-cliff.webp',
+    alt: 'Kelingking cliff viewpoint on a Nusa Penida day trip',
+  },
+  {
+    src: '/photos/fishing-trip/amed-fishing-boats-sunset.webp',
+    alt: 'Traditional fishing boats at sunset on the Bali coast',
+  },
 ];
 
-const WHATSAPP_HREF = buildWhatsAppLink("Hi Vacanza Bali, I'd like a free quote for my trip.");
+const SLIDE_INTERVAL_MS = 2000;
+
+const FEATURE_BARS = [
+  'Private English-Speaking Drivers',
+  'Small-Group & Shared Pricing',
+  'Book Direct via WhatsApp',
+];
+
+const WHATSAPP_HREF = buildWhatsAppLink(
+  "Hi Vacanza Bali, I'd like a free quote for my trip.",
+);
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const reveal = useStaggeredReveal(sectionRef);
 
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isTabHidden, setIsTabHidden] = useState(false);
+
+  useEffect(() => {
+    function handleVisibilityChange() {
+      setIsTabHidden(document.hidden);
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () =>
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, []);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+    if (isHovered || isTabHidden || prefersReducedMotion) return;
+
+    const id = setInterval(() => {
+      setActiveSlide((i) => (i + 1) % SLIDES.length);
+    }, SLIDE_INTERVAL_MS);
+    return () => clearInterval(id);
+  }, [isHovered, isTabHidden, activeSlide]);
+
+  function goToPrevious() {
+    setActiveSlide((i) => (i - 1 + SLIDES.length) % SLIDES.length);
+  }
+
+  function goToNext() {
+    setActiveSlide((i) => (i + 1) % SLIDES.length);
+  }
+
   return (
-    <section ref={sectionRef} className="relative h-[100dvh] w-full overflow-hidden">
-      <img
-        src={HERO_IMAGE}
-        alt="Hiker with backpack watching sunrise over Mount Agung from the Mount Batur trekking route"
-        fetchPriority="high"
-        className="absolute inset-0 h-full w-full object-cover object-[75%_center]"
-      />
+    <section
+      ref={sectionRef}
+      className="relative h-[100dvh] w-full snap-start snap-always overflow-hidden"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setIsHovered(true)}
+      onBlur={() => setIsHovered(false)}
+    >
+      {SLIDES.map((slide, i) => (
+        <Image
+          key={slide.src}
+          src={slide.src}
+          alt={slide.alt}
+          fill
+          priority={i === 0}
+          sizes="100vw"
+          className={`object-cover transition-opacity duration-1000 ease-in-out ${
+            i === activeSlide ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
+      ))}
       {/* Dark scrim — guarantees the white text reads regardless of what's
           underneath it in the source photo, rather than relying on the
           photo happening to be dark in the right places. */}
@@ -71,7 +141,10 @@ export function HeroSection() {
           </h1>
         </div>
 
-        <div style={reveal.getAnimStyle(3)} className="mt-6 flex flex-wrap gap-3">
+        <div
+          style={reveal.getAnimStyle(3)}
+          className="mt-6 flex flex-wrap items-center gap-3"
+        >
           <a
             href={WHATSAPP_HREF}
             target="_blank"
@@ -86,6 +159,30 @@ export function HeroSection() {
           >
             See All Tours
           </Link>
+
+          {/* Slide controls live here, not floating mid-image — the "Private
+              Tours" headline above is huge and bottom-anchored, so at most
+              viewport heights a vertically-centered overlay would sit right
+              on top of it. This row is the one zone whose height is always
+              reserved by real content. */}
+          <div className="ml-auto flex gap-2">
+            <button
+              type="button"
+              onClick={goToPrevious}
+              aria-label="Previous photo"
+              className="rounded-full border border-white/40 bg-white/10 p-2.5 text-white backdrop-blur-sm transition-transform hover:scale-105 hover:bg-white/20 md:p-3"
+            >
+              <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
+            </button>
+            <button
+              type="button"
+              onClick={goToNext}
+              aria-label="Next photo"
+              className="rounded-full border border-white/40 bg-white/10 p-2.5 text-white backdrop-blur-sm transition-transform hover:scale-105 hover:bg-white/20 md:p-3"
+            >
+              <ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
+            </button>
+          </div>
         </div>
       </div>
     </section>

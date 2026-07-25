@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Phone } from "lucide-react";
 import { categories } from "@/data/categories";
@@ -8,9 +9,13 @@ export function Footer() {
     <footer className="border-t border-border bg-card">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-3 lg:px-8">
         <div>
-          <p className="text-lg font-extrabold uppercase tracking-tight text-card-foreground">
-            Vacanza Bali
-          </p>
+          <Image
+            src="/logo/vacanza-logo.webp"
+            alt="Vacanza Bali"
+            width={900}
+            height={602}
+            className="h-12 w-auto"
+          />
           <p className="mt-3 max-w-xs text-sm text-muted-foreground">
             Dolphin tours, waterfalls, sunrise treks and island-hopping boat tickets — booked
             straight from your phone.

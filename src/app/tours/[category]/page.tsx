@@ -4,6 +4,8 @@ import { MessageCircle } from "lucide-react";
 import { Hero } from "@/components/Hero";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ProductCard } from "@/components/ProductCard";
+import { ExperienceGallery } from "@/components/ExperienceGallery";
+import { PlaceholderImage } from "@/components/PlaceholderImage";
 import { categories, getCategory } from "@/data/categories";
 import { getToursByCategory } from "@/data/tours";
 import { ferryTickets } from "@/data/ferry-tickets";
@@ -37,13 +39,51 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
       <Breadcrumbs items={[{ label: "Tours", href: "/tours" }, { label: category.name }]} />
       <Hero
         theme={category.placeholderTheme}
+        image={category.heroImage}
         eyebrow="Tours"
         title={category.name}
         subtitle={category.tagline}
         size="md"
       />
 
-      <section className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+      <ExperienceGallery theme={category.placeholderTheme} photos={category.experiencePhotos} />
+
+      <section className="relative mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+        {/* Decorative side rails — bonus for wide screens only, the
+            ExperienceGallery above is what actually carries this page's
+            "show the experience" job on every viewport. Fixed aspect ratio
+            (not inset-y-0/h-full) so the image gets a normal object-cover
+            crop instead of stretching across the whole (often 1500px+)
+            product list and collapsing into an abstract color smear.
+            Excluded from the accessibility tree and tab order since they're
+            purely visual. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute right-full top-0 mr-6 hidden aspect-[3/4] w-32 overflow-hidden rounded-2xl xl:block"
+        >
+          <PlaceholderImage
+            theme={category.placeholderTheme}
+            label={category.name}
+            src={category.cardImage}
+            showCaption={false}
+            className="h-full w-full"
+          />
+          <div className="absolute inset-y-0 right-0 w-2/3 bg-gradient-to-r from-transparent to-background" />
+        </div>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute left-full top-0 ml-6 hidden aspect-[3/4] w-32 overflow-hidden rounded-2xl xl:block"
+        >
+          <PlaceholderImage
+            theme={category.placeholderTheme}
+            label={category.name}
+            src={category.experiencePhotos[0]?.src ?? category.cardImage}
+            showCaption={false}
+            className="h-full w-full"
+          />
+          <div className="absolute inset-y-0 left-0 w-2/3 bg-gradient-to-l from-transparent to-background" />
+        </div>
+
         {category.slug === "boat-tickets" ? (
           <div className="flex flex-col gap-6">
             {ferryTickets.map((ticket) => (
@@ -53,7 +93,7 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
         ) : (
           <div className="flex flex-col gap-6">
             {getToursByCategory(category.slug).map((tour) => (
-              <ProductCard key={tour.slug} tour={tour} theme={category.placeholderTheme} />
+              <ProductCard key={tour.slug} tour={tour} category={category} />
             ))}
           </div>
         )}

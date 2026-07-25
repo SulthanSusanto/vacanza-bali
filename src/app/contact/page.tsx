@@ -18,6 +18,7 @@ export default function ContactPage() {
     <>
       <Hero
         theme="sunrise"
+        image="/photos/bali/handara-gate.webp"
         eyebrow="Contact"
         title="Let's plan your trip."
         subtitle="Every booking is confirmed directly over WhatsApp — send us your dates and group size and we'll take it from there."

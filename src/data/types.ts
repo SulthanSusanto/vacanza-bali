@@ -44,6 +44,10 @@ export interface TourProduct {
   whatToBring?: string[];
   addOns?: AddOn[];
   notes?: string[];
+  /** Per-product photo (~900w) for ProductCard — falls back to the category's cardImage when absent. */
+  image?: string;
+  /** 1-3 short badge phrases distinguishing this product from others in its category (e.g. "Includes waterfall"). */
+  highlights?: string[];
 }
 
 export type PlaceholderTheme =
@@ -55,11 +59,29 @@ export type PlaceholderTheme =
   | "trail"
   | "boat";
 
+export interface ExperiencePhoto {
+  /** Path under public/, e.g. "/photos/ubud-trip/aling-aling-waterfall-card.webp". */
+  src: string;
+  caption: string;
+}
+
 export interface TourCategory {
   slug: string;
   name: string;
   tagline: string;
   placeholderTheme: PlaceholderTheme;
+  /** Full-bleed photo (1024-1920w) for this category's Hero banner. */
+  heroImage: string;
+  /** Smaller photo (~900w) for grid tiles: CategoryCard, ProductCard, Gallery page. */
+  cardImage: string;
+  /**
+   * Captioned moments for the category page's "See the experience" gallery.
+   * Only populated where real photography exists for that category — thin on
+   * a few categories (nusa-penida, fishing-trip, boat-tickets) until more
+   * photos land; ExperienceGallery hides itself rather than pad with
+   * off-theme stand-ins.
+   */
+  experiencePhotos: ExperiencePhoto[];
 }
 
 export interface ScheduleGroup {

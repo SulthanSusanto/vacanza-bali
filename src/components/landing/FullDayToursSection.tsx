@@ -1,18 +1,13 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { useStaggeredReveal } from "@/hooks/useStaggeredReveal";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 
-// Placeholders — swap for real Vacanza photography before shipping.
-// (Original SECTION3_IMG1 Unsplash ID 404s — reusing the verified-working
-// temple/coastline photo from Section 2 here instead of guessing a new one.)
-const SECTION3_IMG1 =
-  "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1280&q=85";
-const SECTION3_IMG2 =
-  "https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=1280&q=85";
-const SECTION3_BG =
-  "https://images.unsplash.com/photo-1573790387438-4da905039392?auto=format&fit=crop&w=1280&q=85";
+const SECTION3_IMG1 = "/photos/ubud-trip/guests/atv-splash-family-card.webp";
+const SECTION3_IMG2 = "/photos/ubud-trip/tegalalang-rice-terrace-card.webp";
+const SECTION3_BG = "/photos/nusa-penida/kelingking-beach-cliff.webp";
 
 const WHATSAPP_CUSTOM_HREF = buildWhatsAppLink(
   "Hi Vacanza Bali, I'd like to put together a custom tour package."
@@ -49,14 +44,20 @@ export function FullDayToursSection() {
   return (
     <section
       ref={sectionRef}
-      className="flex w-full flex-col gap-1.5 overflow-hidden px-3 pb-1.5 pt-1.5 md:h-[100dvh] md:gap-2 md:px-5 md:pb-2 md:pt-2"
+      className="flex w-full flex-col gap-1.5 overflow-hidden px-3 pb-1.5 pt-1.5 md:h-[100dvh] md:snap-start md:snap-always md:gap-2 md:px-5 md:pb-2 md:pt-2"
     >
       {/* Same fix as ExperiencesSection: no forced min-h-[100dvh] on mobile.
           Grid items stretch to fill their row by default, which was handing
           the left column's flex-[1.2]/flex-1/flex-[0.8] children extra
           height to grow into whenever the section got inflated to a full
-          viewport — undoing the compact min-heights below. */}
-      <div className="grid min-h-0 flex-1 content-start items-start grid-cols-1 gap-1.5 md:grid-cols-2 md:items-stretch md:gap-2">
+          viewport — undoing the compact min-heights below.
+          content-start (mobile) keeps the single row sized to its compact
+          content instead of stretching into the extra space; md:content-stretch
+          restores that stretch on desktop, where the grid row needs to fill
+          the section's full md:h-[100dvh] for the flex-[1.2]/1/0.8 children
+          below to have real room to grow into — without it the row just
+          hugs its content height and those children collapse toward zero. */}
+      <div className="grid min-h-0 flex-1 content-start items-start grid-cols-1 gap-1.5 md:grid-cols-2 md:content-stretch md:items-stretch md:gap-2">
         <div className="flex flex-col gap-1.5 md:gap-2">
           <div
             style={reveal.getAnimStyle(0)}
@@ -76,18 +77,22 @@ export function FullDayToursSection() {
             style={reveal.getAnimStyle(1)}
             className="flex min-h-[110px] flex-1 gap-1.5 md:min-h-0 md:gap-2"
           >
-            <div className="flex-1 overflow-hidden rounded-xl md:rounded-2xl">
-              <img
+            <div className="relative flex-1 overflow-hidden rounded-xl md:rounded-2xl">
+              <Image
                 src={SECTION3_IMG1}
-                alt="Uluwatu clifftop temple at sunset"
-                className="h-full w-full object-cover"
+                alt="A family riding an ATV through a splash on an Ubud day trip"
+                fill
+                sizes="(max-width: 768px) 50vw, 25vw"
+                className="object-cover"
               />
             </div>
-            <div className="flex-1 overflow-hidden rounded-xl md:rounded-2xl">
-              <img
+            <div className="relative flex-1 overflow-hidden rounded-xl md:rounded-2xl">
+              <Image
                 src={SECTION3_IMG2}
                 alt="Ubud rice terraces"
-                className="h-full w-full object-cover"
+                fill
+                sizes="(max-width: 768px) 50vw, 25vw"
+                className="object-cover"
               />
             </div>
           </div>
@@ -123,10 +128,12 @@ export function FullDayToursSection() {
           style={reveal.getAnimStyle(3)}
           className="relative min-h-[280px] overflow-hidden rounded-xl md:min-h-0 md:rounded-2xl"
         >
-          <img
+          <Image
             src={SECTION3_BG}
             alt="Kelingking Beach cliff view, Nusa Penida"
-            className="absolute inset-0 h-full w-full object-cover"
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover"
           />
 
           <div className="absolute bottom-3 left-3 right-3 flex gap-1.5 md:bottom-5 md:left-5 md:right-5 md:gap-2">

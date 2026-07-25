@@ -4,6 +4,7 @@ import { PlaceholderImage } from "@/components/PlaceholderImage";
 
 export function Hero({
   theme,
+  image,
   eyebrow,
   title,
   subtitle,
@@ -12,6 +13,8 @@ export function Hero({
   size = "lg",
 }: {
   theme: PlaceholderTheme;
+  /** Real photo path under public/ — when given, replaces the picsum placeholder. */
+  image?: string;
   eyebrow?: string;
   title: string;
   subtitle?: string;
@@ -24,6 +27,7 @@ export function Hero({
       <PlaceholderImage
         theme={theme}
         label={title}
+        src={image}
         showCaption={false}
         className={size === "lg" ? "h-[68vh] min-h-[420px] w-full" : "h-64 w-full"}
       />

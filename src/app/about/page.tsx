@@ -36,6 +36,7 @@ export default function AboutPage() {
     <>
       <Hero
         theme="jungle"
+        image="/photos/ubud-trip/guests/tirta-empul-flower-offering.webp"
         eyebrow="About Vacanza Bali"
         title="A local team, straightforward pricing."
         subtitle="We run dolphin tours, waterfall trips, sunrise treks and island-hopping boats across Bali — booked directly, no middleman markup."

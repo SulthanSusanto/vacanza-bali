@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export function SplashScreen({ onComplete }: { onComplete: () => void }) {
   const [count, setCount] = useState(0);
@@ -35,6 +36,15 @@ export function SplashScreen({ onComplete }: { onComplete: () => void }) {
         exiting ? "opacity-0" : "opacity-100"
       }`}
     >
+      <Image
+        src="/logo/vacanza-logo.webp"
+        alt="Vacanza Bali"
+        width={900}
+        height={602}
+        priority
+        className="absolute left-6 top-6 h-8 w-auto md:left-10 md:top-10 md:h-10"
+      />
+
       <span className="p-6 text-7xl font-bold leading-none tabular-nums text-black md:p-10 md:text-9xl">
         {count}
       </span>

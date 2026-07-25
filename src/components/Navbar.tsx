@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
@@ -34,15 +35,25 @@ export function Navbar() {
   return (
     <>
       <header className="fixed left-0 right-0 top-0 z-50 flex items-center justify-between bg-white/80 px-4 py-2 backdrop-blur-md md:px-6 md:py-3">
-        <Link href="/" className="flex flex-col text-black">
-          <span className="text-xl font-extrabold uppercase leading-none tracking-tight md:text-2xl">
-            Vacanza
-          </span>
-          <span className="-mt-1.5 text-xl font-extrabold uppercase leading-none tracking-tight md:-mt-2 md:text-2xl">
-            Bali
-          </span>
-          <span className="mt-1.5 text-[8px] font-medium leading-none md:mt-2 md:text-[9px]">
-            private tours &amp; day trips
+        <Link href="/" className="flex items-center gap-2 text-black">
+          <Image
+            src="/logo/vacanza-logo.webp"
+            alt=""
+            width={900}
+            height={602}
+            priority
+            className="h-10 w-auto md:h-12"
+          />
+          <span className="flex flex-col">
+            <span className="text-xl font-extrabold uppercase leading-none tracking-tight md:text-2xl">
+              Vacanza
+            </span>
+            <span className="-mt-1.5 text-xl font-extrabold uppercase leading-none tracking-tight md:-mt-2 md:text-2xl">
+              Bali
+            </span>
+            <span className="mt-1.5 text-[8px] font-medium leading-none md:mt-2 md:text-[9px]">
+              private tours &amp; day trips
+            </span>
           </span>
         </Link>
 

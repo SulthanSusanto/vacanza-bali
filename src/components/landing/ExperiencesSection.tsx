@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { useMaskPositions } from "@/hooks/useMaskPositions";
 import { useImageWidth } from "@/hooks/useImageWidth";
 import { useIsMobile } from "@/hooks/useIsMobile";
@@ -11,9 +12,8 @@ import { getTour } from "@/data/tours";
 import { getStartingTier } from "@/lib/pricing";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 
-// Placeholder — swap for real Vacanza photography before shipping.
-const SECTION2_IMAGE =
-  "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1920&q=85";
+const SECTION2_IMAGE = "/photos/bali/ulun-danu-temple-day.webp";
+const SECTION2_ALT = "Ulun Danu Beratan Temple on the lake";
 
 // On mobile the 4 cards below fall back to a plain cover background (see
 // MaskedCard's isMobile branch) instead of the desktop windowing math, but
@@ -23,9 +23,11 @@ const SECTION2_IMAGE =
 // windowing on mobile.
 const MOBILE_CROPS = ["30% 25%", "70% 15%", "50% 65%", "20% 70%"];
 
-// These four are the landing-page signature picks — real pricing pulled
+// These three are the landing-page signature picks — real pricing pulled
 // from src/data/tours.ts (the source of truth) so this can't drift stale.
-// Full pricelist covers 10 categories with per-group-size tiers, see /tours.
+// Full pricelist covers 10 categories with per-group-size tiers, see /tours
+// — the 4th tile below links straight there instead of picking one more
+// specific product.
 const FEATURED_TOURS = [
   { category: "dolphin-tour", product: "dolphin-snorkeling", displayName: "Dolphin\nTour", active: true },
   { category: "ubud-trip", product: "ubud-day-trip-a", displayName: "Ubud Day\nTrip", active: false },
@@ -33,12 +35,6 @@ const FEATURED_TOURS = [
     category: "mt-batur",
     product: "batur-trekking",
     displayName: "Mt. Batur\nSunrise Trek",
-    active: false,
-  },
-  {
-    category: "nusa-penida",
-    product: "nusa-penida-day-trip",
-    displayName: "Nusa Penida\nDay Trip",
     active: false,
   },
 ];
@@ -62,21 +58,25 @@ export function ExperiencesSection() {
   const imageWidth = useImageWidth(SECTION2_IMAGE, positions[0]?.sh ?? 0);
   const focalX = isMobile ? 0.65 : 0.8;
 
-  const tourPackages = FEATURED_TOURS.map(({ category, product, displayName, active }) => {
-    const tour = getTour(category, product);
-    const startingTier = tour ? getStartingTier(tour) : undefined;
-    return {
-      name: displayName,
-      num: startingTier ? formatShortPrice(startingTier.priceLabel) : "",
-      active,
-      href: `/tours/${category}/${product}`,
-    };
-  });
+  const tourPackages = [
+    ...FEATURED_TOURS.map(({ category, product, displayName, active }) => {
+      const tour = getTour(category, product);
+      const startingTier = tour ? getStartingTier(tour) : undefined;
+      return {
+        name: displayName,
+        num: startingTier ? formatShortPrice(startingTier.priceLabel) : "",
+        active,
+        isSeeAll: false,
+        href: `/tours/${category}/${product}`,
+      };
+    }),
+    { name: "See All\nTours", num: "", active: false, isSeeAll: true, href: "/tours" },
+  ];
 
   return (
     <section
       ref={sectionRef}
-      className="flex w-full flex-col gap-1.5 overflow-hidden px-3 pb-1.5 pt-1.5 md:h-[100dvh] md:gap-2 md:px-5 md:pb-2 md:pt-2"
+      className="flex w-full flex-col gap-1.5 overflow-hidden px-3 pb-1.5 pt-1.5 md:h-[100dvh] md:snap-start md:snap-always md:gap-2 md:px-5 md:pb-2 md:pt-2"
     >
       {/* No min-h-[100dvh] on mobile: that forced this flex column to at
           least one full viewport, and since the grid below is flex-1 with
@@ -93,7 +93,7 @@ export function ExperiencesSection() {
             cardRefs.current[0] = el;
           }}
           bgImage={SECTION2_IMAGE}
-          alt="Bali temple beside a lake at dusk"
+          alt={SECTION2_ALT}
           position={positions[0]}
           imageWidth={imageWidth}
           focalX={focalX}
@@ -117,7 +117,7 @@ export function ExperiencesSection() {
             cardRefs.current[1] = el;
           }}
           bgImage={SECTION2_IMAGE}
-          alt="Bali temple beside a lake at dusk"
+          alt={SECTION2_ALT}
           position={positions[1]}
           imageWidth={imageWidth}
           focalX={focalX}
@@ -148,7 +148,7 @@ export function ExperiencesSection() {
             cardRefs.current[2] = el;
           }}
           bgImage={SECTION2_IMAGE}
-          alt="Bali temple beside a lake at dusk"
+          alt={SECTION2_ALT}
           position={positions[2]}
           imageWidth={imageWidth}
           focalX={focalX}
@@ -171,7 +171,7 @@ export function ExperiencesSection() {
             cardRefs.current[3] = el;
           }}
           bgImage={SECTION2_IMAGE}
-          alt="Bali temple beside a lake at dusk"
+          alt={SECTION2_ALT}
           position={positions[3]}
           imageWidth={imageWidth}
           focalX={focalX}
@@ -199,13 +199,23 @@ export function ExperiencesSection() {
                 >
                   {pkg.name}
                 </h3>
-                <span
-                  className={`flex items-center justify-center self-end whitespace-nowrap rounded-full border px-3 py-1.5 text-xs font-semibold md:px-4 md:py-2 ${
-                    pkg.active ? "border-black text-black" : "border-white text-white"
-                  }`}
-                >
-                  {pkg.num}
-                </span>
+                {pkg.isSeeAll ? (
+                  <span
+                    className={`flex h-9 w-9 items-center justify-center self-end rounded-full border md:h-11 md:w-11 ${
+                      pkg.active ? "border-black text-black" : "border-white text-white"
+                    }`}
+                  >
+                    <ArrowRight className="h-4 w-4" />
+                  </span>
+                ) : (
+                  <span
+                    className={`flex items-center justify-center self-end whitespace-nowrap rounded-full border px-3 py-1.5 text-xs font-semibold md:px-4 md:py-2 ${
+                      pkg.active ? "border-black text-black" : "border-white text-white"
+                    }`}
+                  >
+                    {pkg.num}
+                  </span>
+                )}
               </Link>
             ))}
           </div>

@@ -16,8 +16,7 @@ export default function GalleryPage() {
     <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold text-foreground">Gallery</h1>
       <p className="mt-2 max-w-xl text-sm text-muted-foreground">
-        Real photos from Vacanza Bali tours are on the way — for now, here&apos;s a preview of
-        each category. Tap through for details and pricing.
+        A preview of each category — tap through for details and pricing.
       </p>
 
       <div className="mt-8 columns-1 gap-4 sm:columns-2 lg:columns-3">
@@ -30,6 +29,7 @@ export default function GalleryPage() {
             <PlaceholderImage
               theme={category.placeholderTheme}
               label={category.name}
+              src={category.cardImage}
               className={`w-full ${TILE_HEIGHT[i % TILE_HEIGHT.length]}`}
             />
           </Link>

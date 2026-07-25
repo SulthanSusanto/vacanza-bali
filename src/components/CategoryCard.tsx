@@ -3,18 +3,25 @@ import type { TourCategory } from "@/data/types";
 import { PlaceholderImage } from "@/components/PlaceholderImage";
 import { getCategoryStartingPrice } from "@/lib/pricing";
 
-export function CategoryCard({ category }: { category: TourCategory }) {
+export function CategoryCard({
+  category,
+  className,
+}: {
+  category: TourCategory;
+  className?: string;
+}) {
   const startingPrice = getCategoryStartingPrice(category.slug);
 
   return (
     <Link
       href={`/tours/${category.slug}`}
-      className="group relative flex h-48 flex-col justify-between overflow-hidden rounded-xl md:h-56 md:rounded-2xl"
+      className={`group relative flex h-48 flex-col justify-between overflow-hidden rounded-xl md:h-56 md:rounded-2xl ${className ?? ""}`}
     >
       <div className="absolute inset-0 transition-transform duration-300 group-hover:scale-105">
         <PlaceholderImage
           theme={category.placeholderTheme}
           label={category.name}
+          src={category.cardImage}
           showCaption={false}
           className="h-full w-full"
         />

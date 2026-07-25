@@ -31,6 +31,8 @@ export const tours: TourProduct[] = [
     notes: [
       "Group WhatsApp available to combine travelers in the same area for more affordable shared transport.",
     ],
+    image: "/photos/dolphin-tour/dolphins-jumping-pod-card.webp",
+    highlights: ["Private transport", "Snorkeling included"],
   },
   {
     slug: "dolphin-snorkeling-waterfall",
@@ -58,6 +60,8 @@ export const tours: TourProduct[] = [
       "Fuel",
     ],
     excludes: ["Lunch", "Towel", "Insurance", "Additional expenses", "Tipping (optional)"],
+    image: "/photos/ubud-trip/aling-aling-waterfall-card.webp",
+    highlights: ["Includes waterfall jump", "Private transport"],
   },
   {
     slug: "dolphin-no-transport",
@@ -77,6 +81,8 @@ export const tours: TourProduct[] = [
     ],
     includes: ["Shared traditional boat", "Hot drinks & snacks on boat"],
     excludes: ["Lunch", "Insurance", "Snorkeling equipment (swim-only option)"],
+    image: "/photos/dolphin-tour/dolphins-jumping-pair-card.webp",
+    highlights: ["No transport", "Meet in Lovina"],
   },
 
   // ---------------------------------------------------------------- Ubud Trip
@@ -116,6 +122,8 @@ export const tours: TourProduct[] = [
       "Tandem Quad-Bike (2 people/bike) available at a lower price on request.",
       "Pick-up time depends on area.",
     ],
+    image: "/photos/ubud-trip/guests/atv-dragon-cave-waterfall-1-card.webp",
+    highlights: ["ATV + waterfall", "Alas Harum included"],
   },
   {
     slug: "ubud-day-trip-b",
@@ -147,6 +155,8 @@ export const tours: TourProduct[] = [
       "Personal expenses",
       "Tipping (optional)",
     ],
+    image: "/photos/ubud-trip/guests/atv-dragon-cave-waterfall-2-card.webp",
+    highlights: ["Coffee plantation stop", "Tegenungan Waterfall"],
   },
   {
     slug: "ubud-day-trip-c",
@@ -180,6 +190,8 @@ export const tours: TourProduct[] = [
       "Quad-Bike tandem available at a lower price on request.",
       "Pick-up depends on area; must arrive at the Quad-Bike point by 9:00 AM.",
     ],
+    image: "/photos/ubud-trip/guests/rafting-ayung-river-2-card.webp",
+    highlights: ["ATV + rafting combo"],
   },
   {
     slug: "ubud-sightseeing",
@@ -218,6 +230,8 @@ export const tours: TourProduct[] = [
       "Insurance",
     ],
     whatToBring: ["Cash", "Caps/hats", "Sunscreen", "Sunglasses", "Swimwear & towel", "Change of clothes"],
+    image: "/photos/ubud-trip/guests/tirta-empul-group-bathing-card.webp",
+    highlights: ["No ATV — sightseeing only", "Tirta Empul included"],
   },
   {
     slug: "cooking-class",
@@ -236,6 +250,8 @@ export const tours: TourProduct[] = [
     ],
     includes: ["Hotel transfer"],
     excludes: [],
+    image: "/photos/ubud-trip/guests/coffee-plantation-berries-card.webp",
+    highlights: ["Hands-on cooking class", "Farm tour included"],
   },
   {
     slug: "quad-bike-no-transport",
@@ -260,6 +276,8 @@ export const tours: TourProduct[] = [
     ],
     excludes: [],
     notes: ["Book in advance."],
+    image: "/photos/ubud-trip/guests/atv-couple-closeup-card.webp",
+    highlights: ["No transport", "Solo or tandem"],
   },
   {
     slug: "rafting-no-transport",
@@ -294,6 +312,8 @@ export const tours: TourProduct[] = [
     ],
     excludes: [],
     notes: ["Book in advance."],
+    image: "/photos/ubud-trip/guests/rafting-ayung-river-1-card.webp",
+    highlights: ["No transport", "Sharing or private boat"],
   },
 
   // ---------------------------------------------------------------- Mt. Batur
@@ -330,6 +350,8 @@ export const tours: TourProduct[] = [
         description: "A relaxing open pool with a Lake Batur view, after the trek.",
       },
     ],
+    image: "/photos/mt-batur/guests/couple-sunrise-viewpoint-card.webp",
+    highlights: ["On-foot trekking", "Coffee plantation stop"],
   },
   {
     slug: "batur-jeep",
@@ -365,6 +387,8 @@ export const tours: TourProduct[] = [
         description: "A relaxing open pool with a Lake Batur view, after the tour.",
       },
     ],
+    image: "/photos/mt-batur/guests/jeep-group-sunrise-celebration-card.webp",
+    highlights: ["Offroad jeep ride", "Coffee plantation stop"],
   },
   {
     slug: "batur-combo",
@@ -399,6 +423,8 @@ export const tours: TourProduct[] = [
         description: "A relaxing open pool with a Lake Batur view, after the tour.",
       },
     ],
+    image: "/photos/mt-batur/guests/jeep-roof-sunrise-solo-card.webp",
+    highlights: ["Jeep + short trek combo"],
   },
 
   // ---------------------------------------------------------------- Nusa Penida
@@ -494,6 +520,8 @@ export const tours: TourProduct[] = [
       "Insurance",
     ],
     whatToBring: ["Cash", "Caps/hats", "Sunscreen", "Sunglasses", "Swimwear & towel", "Change of clothes"],
+    image: "/photos/uluwatu-trip/kecak-fire-dance-card.webp",
+    highlights: ["Kecak fire dance included", "3 stops"],
   },
   {
     slug: "uluwatu-day-trip-b",
@@ -552,6 +580,8 @@ export const tours: TourProduct[] = [
       "Insurance",
     ],
     whatToBring: ["Cash", "Caps/hats", "Sunscreen", "Sunglasses", "Swimwear & towel", "Change of clothes"],
+    image: "/photos/bali/guests/temple-sarong-couple-card.webp",
+    highlights: ["Choose up to 3 beaches", "No fire dance"],
   },
 
   // ---------------------------------------------------------------- Fishing Trip
