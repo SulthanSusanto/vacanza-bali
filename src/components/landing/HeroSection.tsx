@@ -5,28 +5,56 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useStaggeredReveal } from '@/hooks/useStaggeredReveal';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import { buildWhatsAppLink } from '@/lib/whatsapp';
 
-const SLIDES = [
+// Landscape-sourced photos with real guests in them, for desktop — a
+// portrait photo center-cropped to a wide frame loses the composition (or
+// the person in it), so these are picked specifically for their orientation,
+// not just reused from the mobile set.
+const DESKTOP_SLIDES = [
   {
-    src: '/photos/mt-batur/sunrise-above-clouds.webp',
-    alt: 'Sunrise trekking above the clouds at Mt. Batur',
+    src: '/photos/mt-batur/hiker-mount-batur.webp',
+    alt: 'A hiker taking in the sunrise view above the clouds at Mt. Batur',
   },
   {
-    src: '/photos/dolphin-tour/dolphins-jumping-pod.webp',
-    alt: 'Wild dolphins at play near Lovina',
+    src: '/photos/ubud-trip/guests/atv-group-mud-crossing.webp',
+    alt: 'A group celebrating on their ATVs after a muddy Ubud day trip',
+  },
+  {
+    src: '/photos/ubud-trip/guests/atv-river-convoy.webp',
+    alt: 'Guests riding ATVs through a jungle river crossing in Ubud',
+  },
+  {
+    src: '/photos/village-adventure/rice-planting-couple.webp',
+    alt: 'A couple planting rice on a Bali village adventure',
+  },
+];
+
+// Portrait-sourced photos with real guests in them, for mobile — same
+// reasoning in reverse. There's a much deeper pool of portrait guest photos
+// available (most were shot on phones held vertically), so mobile gets one
+// more slide than desktop rather than repeating one to force parity.
+const MOBILE_SLIDES = [
+  {
+    src: '/photos/mt-batur/guests/couple-sunrise-viewpoint.webp',
+    alt: 'A couple watching the sunrise above the clouds at Mt. Batur',
   },
   {
     src: '/photos/ubud-trip/guests/atv-waterfall-splash.webp',
     alt: 'A guest riding an ATV through a waterfall on an Ubud day trip',
   },
   {
-    src: '/photos/nusa-penida/kelingking-beach-cliff.webp',
-    alt: 'Kelingking cliff viewpoint on a Nusa Penida day trip',
+    src: '/photos/ubud-trip/guests/tirta-empul-flower-offering.webp',
+    alt: 'A guest holding a flower offering at Tirta Empul holy spring',
   },
   {
-    src: '/photos/fishing-trip/amed-fishing-boats-sunset.webp',
-    alt: 'Traditional fishing boats at sunset on the Bali coast',
+    src: '/photos/mt-batur/guests/jeep-group-sunrise-celebration.webp',
+    alt: 'Guests celebrating sunrise on a Mt. Batur jeep tour',
+  },
+  {
+    src: '/photos/ubud-trip/guests/rafting-ayung-river-2.webp',
+    alt: 'Guests whitewater rafting the Ayung River in Ubud',
   },
 ];
 
@@ -45,10 +73,19 @@ const WHATSAPP_HREF = buildWhatsAppLink(
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const reveal = useStaggeredReveal(sectionRef);
+  const isMobile = useIsMobile();
+  const slides = isMobile ? MOBILE_SLIDES : DESKTOP_SLIDES;
 
   const [activeSlide, setActiveSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [isTabHidden, setIsTabHidden] = useState(false);
+
+  // Desktop/mobile have different slide counts — deriving the display index
+  // with modulo (rather than storing a separately-clamped state) means it's
+  // always in bounds for whichever list is active, even if the viewport
+  // crosses the breakpoint mid-session and slides.length changes underneath
+  // a stale activeSlide value.
+  const displaySlide = activeSlide % slides.length;
 
   useEffect(() => {
     function handleVisibilityChange() {
@@ -66,29 +103,29 @@ export function HeroSection() {
     if (isHovered || isTabHidden || prefersReducedMotion) return;
 
     const id = setInterval(() => {
-      setActiveSlide((i) => (i + 1) % SLIDES.length);
+      setActiveSlide((i) => (i + 1) % slides.length);
     }, SLIDE_INTERVAL_MS);
     return () => clearInterval(id);
-  }, [isHovered, isTabHidden, activeSlide]);
+  }, [isHovered, isTabHidden, activeSlide, slides.length]);
 
   function goToPrevious() {
-    setActiveSlide((i) => (i - 1 + SLIDES.length) % SLIDES.length);
+    setActiveSlide((i) => (i - 1 + slides.length) % slides.length);
   }
 
   function goToNext() {
-    setActiveSlide((i) => (i + 1) % SLIDES.length);
+    setActiveSlide((i) => (i + 1) % slides.length);
   }
 
   return (
     <section
       ref={sectionRef}
-      className="relative h-[100dvh] w-full snap-start snap-always overflow-hidden"
+      className="relative h-[100dvh] w-full overflow-hidden md:snap-start md:snap-always"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onFocus={() => setIsHovered(true)}
       onBlur={() => setIsHovered(false)}
     >
-      {SLIDES.map((slide, i) => (
+      {slides.map((slide, i) => (
         <Image
           key={slide.src}
           src={slide.src}
@@ -97,7 +134,7 @@ export function HeroSection() {
           priority={i === 0}
           sizes="100vw"
           className={`object-cover transition-opacity duration-1000 ease-in-out ${
-            i === activeSlide ? 'opacity-100' : 'opacity-0'
+            i === displaySlide ? 'opacity-100' : 'opacity-0'
           }`}
         />
       ))}

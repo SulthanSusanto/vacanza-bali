@@ -57,7 +57,18 @@ body {
  * utilities). Without this, free-scrolling the landing page can stop at any
  * arbitrary halfway point between two full-height sections, showing an
  * awkward sliver of whichever one is next.
+ *
+ * Desktop only (min-width: 768px, matching Tailwind's md: breakpoint used on
+ * the sections themselves): mobile browsers resize their dynamic viewport
+ * (100dvh) as the address bar shows/hides mid-scroll, and combining that
+ * with `mandatory` + `scroll-snap-stop: always` is a known way to make
+ * scroll feel stuck/unresponsive on real phones — a failure mode headless
+ * testing doesn't reproduce since there's no dynamic toolbar there. Mobile
+ * sections aren't uniformly full-height anyway (see the per-section
+ * comments), so snapping was never load-bearing there.
  */
-html {
-  scroll-snap-type: y mandatory;
+@media (min-width: 768px) {
+  html {
+    scroll-snap-type: y mandatory;
+  }
 }
