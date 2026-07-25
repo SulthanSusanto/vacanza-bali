@@ -72,8 +72,8 @@ export default async function ProductPage({ params }: { params: Promise<Params> 
       <section className="mx-auto max-w-6xl px-4 pb-16 sm:px-6 lg:px-8">
         <h2 className="text-xl font-bold text-foreground md:text-2xl">See other categories</h2>
         <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
-          {otherCategories.map((c) => (
-            <CategoryCard key={c.slug} category={c} />
+          {otherCategories.map((c, i) => (
+            <CategoryCard key={c.slug} category={c} className={i === 2 ? "hidden sm:flex" : undefined} />
           ))}
         </div>
       </section>

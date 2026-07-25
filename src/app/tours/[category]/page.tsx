@@ -4,6 +4,8 @@ import { MessageCircle } from "lucide-react";
 import { Hero } from "@/components/Hero";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ProductCard } from "@/components/ProductCard";
+import { ProductDetailBody } from "@/components/ProductDetailBody";
+import { CategoryCard } from "@/components/CategoryCard";
 import { ExperienceGallery } from "@/components/ExperienceGallery";
 import { PlaceholderImage } from "@/components/PlaceholderImage";
 import { categories, getCategory } from "@/data/categories";
@@ -33,6 +35,45 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
   const { category: slug } = await params;
   const category = getCategory(slug);
   if (!category) notFound();
+
+  const categoryTours = getToursByCategory(category.slug);
+
+  // A category with exactly one product doesn't need a "browse the lineup"
+  // page around a list of one — that's an extra click before someone can
+  // actually see pricing and book. Render the full product detail directly
+  // instead, same as /tours/[category]/[product] would show for it (that
+  // route still works too, this just isn't the only way in).
+  if (category.slug !== "boat-tickets" && categoryTours.length === 1) {
+    const tour = categoryTours[0];
+    const otherCategories = categories.filter((c) => c.slug !== category.slug).slice(0, 3);
+
+    return (
+      <>
+        <Breadcrumbs items={[{ label: "Tours", href: "/tours" }, { label: category.name }]} />
+        <Hero
+          theme={category.placeholderTheme}
+          image={category.heroImage}
+          eyebrow={category.name}
+          title={tour.name}
+          subtitle={tour.summary}
+          size="md"
+        />
+
+        <ExperienceGallery theme={category.placeholderTheme} photos={category.experiencePhotos} />
+
+        <ProductDetailBody tour={tour} category={category} />
+
+        <section className="mx-auto max-w-6xl px-4 pb-16 sm:px-6 lg:px-8">
+          <h2 className="text-xl font-bold text-foreground md:text-2xl">See other categories</h2>
+          <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
+            {otherCategories.map((c, i) => (
+              <CategoryCard key={c.slug} category={c} className={i === 2 ? "hidden sm:flex" : undefined} />
+            ))}
+          </div>
+        </section>
+      </>
+    );
+  }
 
   return (
     <>
@@ -92,7 +133,7 @@ export default async function CategoryPage({ params }: { params: Promise<Params>
           </div>
         ) : (
           <div className="flex flex-col gap-6">
-            {getToursByCategory(category.slug).map((tour) => (
+            {categoryTours.map((tour) => (
               <ProductCard key={tour.slug} tour={tour} category={category} />
             ))}
           </div>

@@ -37,7 +37,7 @@ export function ProductCard({
         showCaption={false}
         className="h-36 w-full sm:h-auto sm:w-48 sm:shrink-0"
       />
-      <div className="relative z-10 flex flex-1 flex-col justify-between p-4">
+      <div className="flex flex-1 flex-col justify-between p-4">
         <div>
           <h3 className="text-base font-semibold text-card-foreground">{tour.name}</h3>
           <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{tour.summary}</p>
@@ -79,13 +79,13 @@ export function ProductCard({
               <span className="text-xs">/{startingTier.unit === "per-boat" ? "boat" : "person"}</span>
             </p>
           )}
-          <div className="relative z-10 flex items-center gap-3">
+          <div className="flex items-center gap-3">
             <a
               href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Book ${tour.name} via WhatsApp`}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform hover:scale-105"
+              className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform hover:scale-105"
             >
               <MessageCircle className="h-4 w-4" />
             </a>
